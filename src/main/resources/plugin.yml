@@ -1,0 +1,86 @@
+name: RadioLampEngine
+version: $version
+main: RadioLampEngine
+description: $description
+api-version: '$apiVersion'
+
+author: somichev.dev
+website: https://somichev.dev
+contributors:
+  - Dest0re (Danil Starikov)
+  - mrknrt
+  - nulla_quattuor
+  - gafirudo_
+  - my cats
+depend:
+  - LibsDisguises
+prefix: Radio Lamp Engine
+
+commands:
+  get:
+    description: Get any item registered in RL engine.
+    permission: rl_engine.get
+    aliases: [get]
+    permission-message: ""
+    usage: "Usage: /get [id]"
+  ailments:
+    description: Manage ailments in RL engine.
+    permission: rl_engine.ailments
+    aliases: [diseases]
+    permission-message: ""
+    usage: "Usage: /ailments [id] [status|toggle] [player]"
+  classdialog:
+    description: you are not supposed to be here.
+    permission: rl_engine.classdialog
+    permission-message: ""
+    usage: "fuck you"
+  snowstorm:
+    description: Start a snowstorm in your world.
+    permission: rl_engine.snowstorm
+    permission-message: ""
+    usage: "Usage: /snowstorm"
+  bug_report:
+    description: Get a form for bug report submission.
+    # noinspection YAMLSchemaValidation
+    permission: rl_engine.bug_report
+    aliases: [bugreport]
+    permission-message: ""
+    usage: "Usage: /bug_report"
+  set_lives:
+    description: Change amount of lives for a player.
+    permission: rl_engine.set_lives
+    permission-message: ""
+    usage: "Usage: /set_lives [player] [amount]"
+  radiolamp:
+    description: Radio Lamp Engine credits.
+    permission: rl_engine.about
+    permission-message: ""
+    usage: "Usage: /radiolamp"
+
+
+permissions:
+  rl_engine.*:
+    default: op
+    children:
+      rl_engine.get: true
+      rl_engine.ailments: true
+      rl_engine.classdialog: true
+      rl_engine.snowstorm: true
+      rl_engine.bug_report: true
+      rl_engine.set_lives: true
+      rl_engine.about: true
+
+    rl_engine.get:
+      default: op
+    rl_engine.ailments:
+      default: op
+    rl_engine.classdialog:
+      default: true
+    rl_engine.snowstorm:
+      default: op
+    rl_engine.bug_report:
+      default: true
+    rl_engine.set_lives:
+      default: op
+    rl_engine.about:
+      default: true
