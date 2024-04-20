@@ -13,7 +13,7 @@ import org.bukkit.inventory.ItemStack
 import org.bukkit.inventory.meta.ItemMeta
 import org.bukkit.persistence.PersistentDataContainer
 
-object GunTableSummonerItem: AbstractRLItem {
+object WeaponTableSummonerItem: AbstractRLItem {
     override val baseItem: Material = Material.CHAIN_COMMAND_BLOCK
     override val model: Int = 44436
     override val id: String = "weapon_table"
@@ -45,5 +45,7 @@ object GunTableSummonerItem: AbstractRLItem {
         shulker.customName(Component.text("gun"))
         shulker.isCustomNameVisible = false
         shulker.color = DyeColor.BLACK
+        shulker.isSilent = true
+        tableItem.amount -= 1
     }
 }
