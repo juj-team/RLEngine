@@ -6,7 +6,7 @@ import items.hearts.CookedHeart
 import items.hearts.Heart
 import items.metaphysics.ColdPhoneItem
 import items.misc.*
-import items.weapons.GunTableSummonerItem
+import items.weapons.WeaponTableSummonerItem
 import items.weapons.guns.*
 import items.weapons.parts.*
 
@@ -50,7 +50,7 @@ object RLEngineItems {
         HeavyRifleWeapon
         LightRifleGunItem
         CollapseRifleGunItem
-        GunTableSummonerItem
+        WeaponTableSummonerItem
         // weapon parts
         WeaponNetItem
         WeaponLightningItem
