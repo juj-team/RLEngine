@@ -1,4 +1,4 @@
-package listeners.weapon_table
+package listeners.weapons
 
 import gui.WeaponTableGui
 import net.kyori.adventure.text.Component

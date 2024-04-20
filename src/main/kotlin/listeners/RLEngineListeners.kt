@@ -8,7 +8,8 @@ import listeners.metaphysics.PlayerDeathListener
 import listeners.metaphysics.PlayerJoinListener
 import listeners.temperature.TempBarCreator
 import listeners.temperature.TempBarDeleter
-import listeners.weapon_table.WeaponTableInteractor
+import listeners.weapons.SkeletonDropsRemover
+import listeners.weapons.WeaponTableInteractor
 import org.bukkit.Bukkit
 import org.bukkit.event.Listener
 
@@ -27,6 +28,7 @@ object RLEngineListeners {
         EnchantingTableDisabler,
         PlayerNameHider,
         WeaponTableInteractor,
+        SkeletonDropsRemover,
     )
     init {
         registerKnownListeners()
