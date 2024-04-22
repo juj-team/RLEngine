@@ -17,7 +17,7 @@ import org.bukkit.persistence.PersistentDataContainer
 import org.bukkit.potion.PotionEffect
 import org.bukkit.potion.PotionEffectType
 
-object HeavyRifleWeapon: RangedWeapon {
+object HeavyRifleWeaponItem: RangedWeapon {
     override val cooldown: Int = 60
     override val magCapacity: Int = 1
     override val model: Int = 44402

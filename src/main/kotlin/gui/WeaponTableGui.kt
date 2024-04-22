@@ -82,7 +82,7 @@ class WeaponTableGui(private val shulker: Shulker) {
         }
     }
     private fun craftFromItems(tableContents: WeaponTableSlotContents): ItemStack? {
-        return WeaponTableRecipes.getRecipe(
+        return WeaponTableRecipes.getRecipeByIngredients(
         tableContents.weapon ?: return null,
         tableContents.metal ?: return null,
         tableContents.modifier ?: return null,

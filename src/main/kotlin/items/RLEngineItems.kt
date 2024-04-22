@@ -47,7 +47,7 @@ object RLEngineItems {
         RevolverGunItem,
         ShotgunGunItem,
         SawedOffGunItem,
-        HeavyRifleWeapon,
+        HeavyRifleWeaponItem,
         LightRifleGunItem,
         CollapseRifleGunItem,
         WeaponTableSummonerItem,
