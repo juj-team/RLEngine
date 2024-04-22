@@ -21,7 +21,6 @@ object BackpackItem: AbstractRLItem {
     override val baseItem: Material = Material.CHAIN_COMMAND_BLOCK
     override val model: Int = 44417
     override val id: String = "backpack"
-    init{ this.createItem() }
     override fun getItem(result: ItemStack, resultMeta: ItemMeta, resultPDC: PersistentDataContainer): ItemStack {
         resultMeta.displayName(
             Component.text("Рюкзак", TextColor.color(250,250,250))

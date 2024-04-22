@@ -8,7 +8,5 @@ object HookItem : WeaponPart {
     override val model = 44429
     override val name = Component.text("Крюк").decoration(TextDecoration.ITALIC, false)
 
-    init {
-        this.createItem()
-    }
+
 }

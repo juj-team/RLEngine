@@ -19,9 +19,7 @@ object CollapseRifleGunItem: RangedWeapon {
     override val magCapacity: Int = 1
     override val model: Int = 44403
     override val id: String = "collapse_gun"
-    init{
-        this.createItem()
-    }
+    
     override fun checkItemAsAmmo(item: ItemStack): Boolean {
         return item.type == Material.ARROW
     }

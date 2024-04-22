@@ -8,7 +8,5 @@ object RifledBarrelItem: WeaponPart {
     override val model = 44422
     override val name = Component.text("Нарезной ствол").decoration(TextDecoration.ITALIC, false)
 
-    init{
-        this.createItem()
-    }
+    
 }

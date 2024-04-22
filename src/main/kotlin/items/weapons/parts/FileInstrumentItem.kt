@@ -8,7 +8,5 @@ object FileInstrumentItem : WeaponPart {
     override val model = 44424
     override val name = Component.text("Напильник").decoration(TextDecoration.ITALIC, false)
 
-    init {
-        this.createItem()
-    }
+
 }

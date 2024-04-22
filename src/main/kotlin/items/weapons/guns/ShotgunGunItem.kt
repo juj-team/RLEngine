@@ -19,9 +19,7 @@ object ShotgunGunItem: RangedWeapon {
     override val magCapacity: Int = 1
     override val model: Int = 44407
     override val id: String = "shotgun_gun"
-    init{
-        this.createItem()
-    }
+    
     override fun checkItemAsAmmo(item: ItemStack): Boolean {
         return item.type == Material.ARROW
     }

@@ -11,7 +11,7 @@ object FanTotemItem: DepersTotemItem {
     override val itemName: String = "Ветряк"
     override val model: Int = 1
     override val id: String = "depers_fan"
-    init { this.createItem() }
+    
 
     override fun onInventoryTick(player: Player) {
         if(!compare(player.inventory.itemInOffHand)) return

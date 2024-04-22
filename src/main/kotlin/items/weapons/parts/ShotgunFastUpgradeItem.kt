@@ -8,7 +8,5 @@ object ShotgunFastUpgradeItem : WeaponPart {
     override val model = 44433
     override val name = Component.text("Быстрый затвор дробовика").decoration(TextDecoration.ITALIC, false)
 
-    init {
-        this.createItem()
-    }
+
 }

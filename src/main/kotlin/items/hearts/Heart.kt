@@ -12,9 +12,7 @@ object Heart: AbstractRLItem {
     override val baseItem: Material = Material.CHAIN_COMMAND_BLOCK
     override val model: Int = 44410
     override val id: String = "player_heart"
-    init{
-        this.createItem()
-    }
+    
 
     override fun getItem(result: ItemStack, resultMeta: ItemMeta, resultPDC: PersistentDataContainer): ItemStack {
 

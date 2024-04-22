@@ -22,9 +22,7 @@ object HeavyRifleWeapon: RangedWeapon {
     override val magCapacity: Int = 1
     override val model: Int = 44402
     override val id: String = "heavy_rifle_gun"
-    init{
-        this.createItem()
-    }
+    
     override fun checkItemAsAmmo(item: ItemStack): Boolean {
         return item.type == Material.ARROW
     }

@@ -29,7 +29,7 @@ object DurilkaTotemItem: DepersTotemItem {
         PotionEffectType.UNLUCK,
         PotionEffectType.WEAKNESS
     )
-    init { this.createItem() }
+    
 
     override fun onInventoryTick(player: Player) {
         if (!compare(player.inventory.itemInOffHand)) return

@@ -20,7 +20,6 @@ object GliderItem: AbstractRLItem {
     override val model: Int = 44301
     override val id: String = "glider"
     init{
-        this.createItem()
         RLEngineTaskManager.runTask({
             Bukkit.getOnlinePlayers().filter{
                 val chestpiece = it.inventory.chestplate

@@ -10,7 +10,7 @@ object CacadooTotemItem: DepersTotemItem {
     override val model: Int = 3
     override val itemName: String = "Какаду"
     override val id: String = "depers_cacadoo"
-    init { this.createItem() }
+    
 
     private const val FORCE = 20.0
     private const val RADIUS = 5.0

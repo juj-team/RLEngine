@@ -57,7 +57,6 @@ object KalykItem: AbstractRLItem {
         ),
     )
     init {
-        this.createItem()
         RLEngineTaskManager.runTask({
             Bukkit.getOnlinePlayers().filter{
                 val offhand = it.inventory.itemInOffHand

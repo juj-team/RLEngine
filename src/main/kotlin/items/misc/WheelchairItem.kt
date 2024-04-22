@@ -17,9 +17,7 @@ object WheelchairItem: AbstractRLItem {
     override val baseItem: Material = Material.PIG_SPAWN_EGG
     override val model: Int = 44402
     override val id: String = "wheelchair_spawner"
-    init{
-        this.createItem()
-    }
+    
     override fun getItem(result: ItemStack, resultMeta: ItemMeta, resultPDC: PersistentDataContainer): ItemStack {
         resultMeta.displayName(
             Component.text("ИНВАЛИДНАЯ КОЛЯСКА (ахуеть теперь)", TextColor.color(200,100,250))

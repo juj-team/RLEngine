@@ -13,7 +13,7 @@ object DuloTotemItem: DepersTotemItem {
     override val id: String = "depers_dulo"
     private const val RADIUS = 5.0
     private const val FORCE = 100.0
-    init { this.createItem() }
+    
 
     override fun onInventoryTick(player: Player) {
         if(!compare(player.inventory.itemInOffHand)) return

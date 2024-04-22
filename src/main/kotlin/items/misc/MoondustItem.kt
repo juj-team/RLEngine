@@ -27,9 +27,7 @@ import java.util.concurrent.ThreadLocalRandom
         PotionEffect(PotionEffectType.REGENERATION, 20*60*10, 0),
         PotionEffect(PotionEffectType.SPEED, 20*60*10, 1),
     )
-    init{
-        this.createItem()
-    }
+    
     override fun getItem(result: ItemStack, resultMeta: ItemMeta, resultPDC: PersistentDataContainer): ItemStack {
         resultMeta.setCustomModelData(model)
         resultMeta.displayName(Component.text("Лунная пыль"))

@@ -17,9 +17,7 @@ object WeaponTableSummonerItem: AbstractRLItem {
     override val baseItem: Material = Material.CHAIN_COMMAND_BLOCK
     override val model: Int = 44436
     override val id: String = "weapon_table"
-    init{
-        this.createItem()
-    }
+    
     override fun getItem(result: ItemStack, resultMeta: ItemMeta, resultPDC: PersistentDataContainer): ItemStack {
         resultMeta.displayName(Component.text("Оружейный стол"))
         resultMeta.setCustomModelData(model)

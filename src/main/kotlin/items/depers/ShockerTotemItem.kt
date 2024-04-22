@@ -23,7 +23,7 @@ object ShockerTotemItem: DepersTotemItem {
         "Завтра это точно будет болеть..",
         "Ну всё, конец."
     )
-    init { this.createItem() }
+    
 
     override fun onInventoryTick(player: Player) {
         val c = Random.nextDouble(0.0, 1.0)

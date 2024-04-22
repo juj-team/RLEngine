@@ -16,9 +16,7 @@ object ColdPhoneItem: AbstractRLItem {
     override val baseItem: Material = Material.TOTEM_OF_UNDYING
     override val model: Int = 44401
     override val id: String = "cold_line"
-    init{
-        this.createItem()
-    }
+    
     override fun getItem(result: ItemStack, resultMeta: ItemMeta, resultPDC: PersistentDataContainer): ItemStack {
         resultMeta.displayName(Component.text("Холодная линия", TextColor.color(113, 245, 245)))
         resultMeta.setCustomModelData(model)

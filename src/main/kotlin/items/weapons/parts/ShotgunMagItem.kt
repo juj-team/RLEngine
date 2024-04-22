@@ -8,7 +8,5 @@ object ShotgunMagItem : WeaponPart {
     override val model = 44432
     override val name = Component.text("Магазин дробовика").decoration(TextDecoration.ITALIC, false)
 
-    init {
-        this.createItem()
-    }
+
 }
