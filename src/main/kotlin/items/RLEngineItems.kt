@@ -12,7 +12,7 @@ import items.weapons.parts.*
 
 object RLEngineItems {
     private val RLEItems = mutableMapOf<String, AbstractRLItem>()
-    val registryElements = listOf(
+    private val registryElements = listOf(
         // And now, the list of ALL items for registration. Cuz kotlin can't have self-instantiating singletons
         // & I don't have time to fuck around with reflections
         // depers
@@ -35,8 +35,8 @@ object RLEngineItems {
         GliderItem,
         WheelchairItem,
         KalykItem,
-        MoondustItem,
-        // metaphys,
+        MoonDustItem,
+        // metaphysics,
         ColdPhoneItem,
         Heart,
         CookedHeart,

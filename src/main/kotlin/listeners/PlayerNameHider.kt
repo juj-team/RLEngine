@@ -9,22 +9,22 @@ import org.bukkit.scoreboard.Team
 object PlayerNameHider: Listener {
 
     // Load name teams from file. If there are none - revert to defaults.
-    private val defaultTeamName: String = "HideName"
-    private val premiumTeamName: String = "jujplus"
+    private const val DEFAULT_TEAM_NAME: String = "HideName"
+    private const val PREMIUM_TEAM_NAME: String = "jujplus"
 
     @EventHandler
     fun onPlayerJoin(event: PlayerJoinEvent){
         val scoreboard = Bukkit.getScoreboardManager().mainScoreboard
 
-        var hidingTeam = scoreboard.getTeam(defaultTeamName)
-        var premiumTeam = scoreboard.getTeam(premiumTeamName)
+        var hidingTeam = scoreboard.getTeam(DEFAULT_TEAM_NAME)
+        var premiumTeam = scoreboard.getTeam(PREMIUM_TEAM_NAME)
 
         if (hidingTeam == null){
-            hidingTeam = scoreboard.registerNewTeam(defaultTeamName)
+            hidingTeam = scoreboard.registerNewTeam(DEFAULT_TEAM_NAME)
             hidingTeam.setOption(Team.Option.NAME_TAG_VISIBILITY, Team.OptionStatus.NEVER)
         }
         if (premiumTeam == null){
-            premiumTeam = scoreboard.registerNewTeam(premiumTeamName)
+            premiumTeam = scoreboard.registerNewTeam(PREMIUM_TEAM_NAME)
             hidingTeam.setOption(Team.Option.NAME_TAG_VISIBILITY, Team.OptionStatus.NEVER)
         }
 

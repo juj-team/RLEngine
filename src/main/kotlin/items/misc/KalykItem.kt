@@ -25,14 +25,14 @@ object KalykItem: AbstractRLItem {
     override val baseItem: Material = Material.PETRIFIED_OAK_SLAB
     override val model: Int = 0
     override val id: String = "hookah"
-    val fuelKey = NamespacedKey("rle", "fuel")
+    private val fuelKey = NamespacedKey("rle", "fuel")
     private val allowedFuels: Map<Material, Int> = mapOf(
         Material.APPLE to 1,
         Material.CARROT to 2,
         Material.GLOW_BERRIES to 3,
         Material.HONEYCOMB to 4
     )
-    val fuels = mapOf(
+    private val fuels = mapOf(
         0 to listOf(
             PotionEffect(PotionEffectType.LUCK, 20*3, 0, true, false, false)
         ),

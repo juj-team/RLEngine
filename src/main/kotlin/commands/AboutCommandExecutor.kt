@@ -11,7 +11,7 @@ import org.bukkit.command.TabCompleter
 import org.bukkit.entity.Player
 
 class AboutCommandExecutor: CommandExecutor, TabCompleter {
-    val aboutMsg = "<gold><b>RADIO LAMP ENGINE</b> - ГЛАВНЫЙ ДВИЖОК ИЮЛЯ</gold>" +
+    private val aboutMsg = "<gold><b>RADIO LAMP ENGINE</b> - ГЛАВНЫЙ ДВИЖОК ИЮЛЯ</gold>" +
             "<br><br><b><dark_green>Наш сайт</dark_green></b>: <u><click:open_url:'https://july.pp.ru/'>july.pp.ru</click></u>" +
             "<br><green><b>Авторы</b></green>: " +
             "<u><br><click:open_url:'https://somichev.dev/'>somichev.dev</click></u> - код" +
@@ -32,6 +32,7 @@ class AboutCommandExecutor: CommandExecutor, TabCompleter {
             return true
         }
         sender.sendMessage(MiniMessage.miniMessage().deserialize(aboutMsg))
+        @Suppress("UnstableApiUsage")
         sender.sendMessage(Component.text("Версия: ${RadioLampEngine.instance.pluginMeta.version}", TextColor.color(50, 200, 50)))
         return true
     }

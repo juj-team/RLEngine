@@ -14,7 +14,7 @@ import org.bukkit.persistence.PersistentDataType
 
 class Wheelchair(
     override val loc: Location,
-    val pig: Pig = loc.world.spawnEntity(loc, EntityType.PIG) as Pig,
+    private val pig: Pig = loc.world.spawnEntity(loc, EntityType.PIG) as Pig,
 ) : RLEngineEntity {
     override val id: String = "wheelchair"
 

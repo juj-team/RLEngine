@@ -15,7 +15,7 @@ import org.bukkit.potion.PotionEffect
 import org.bukkit.potion.PotionEffectType
 import java.util.concurrent.ThreadLocalRandom
 
-    object MoondustItem: AbstractRLItem {
+    object MoonDustItem: AbstractRLItem {
     override val baseItem: Material = Material.WHITE_DYE
     override val model: Int = 44401
     override val id: String = "moon_dust"

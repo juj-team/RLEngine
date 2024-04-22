@@ -138,7 +138,7 @@ enum class WeaponTableRecipes(
         metal = {item -> item.amount >= 6
                 && item.type == Material.IRON_INGOT},
         result = {weapon, modifier, metal, fuel ->
-            val modKey = WeaponModifiers.BAYONETTE.key
+            val modKey = WeaponModifiers.BAYONET.key
             val result = weapon.clone()
             val resultMeta = result.itemMeta
             resultMeta.persistentDataContainer.set(
@@ -339,12 +339,12 @@ enum class WeaponTableRecipes(
             result
         }
     ),
-    BONEBREAKER_AMMO(
+    BONE_BREAKER_AMMO(
         base = {item -> item.type == Material.ARROW && item.amount >= 16},
         metal = {item -> item.type == Material.IRON_INGOT && item.amount >= 10},
         modifier = {item -> item.type == Material.COPPER_INGOT && item.amount >= 14},
         result = {base, modifier, metal, fuel ->
-            val modKey = AmmoModifiers.BONEBREAKER.key
+            val modKey = AmmoModifiers.BONE_BREAKER.key
             val result = base.clone()
             val resultMeta = result.itemMeta
             resultMeta.persistentDataContainer.set(

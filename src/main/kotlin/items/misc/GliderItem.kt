@@ -22,8 +22,8 @@ object GliderItem: AbstractRLItem {
     init{
         RLEngineTaskManager.runTask({
             Bukkit.getOnlinePlayers().filter{
-                val chestpiece = it.inventory.chestplate
-                chestpiece != null && compare(chestpiece)
+                val chestPiece = it.inventory.chestplate
+                chestPiece != null && compare(chestPiece)
             }.forEach{ onInventoryTick(it)}
         }, 20L, 10L)
     }
