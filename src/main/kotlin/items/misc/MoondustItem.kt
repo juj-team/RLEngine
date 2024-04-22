@@ -4,6 +4,7 @@ import ailments.MoonInfection
 import items.AbstractRLItem
 import net.kyori.adventure.text.Component
 import org.bukkit.Material
+import org.bukkit.event.Event
 import org.bukkit.event.EventHandler
 import org.bukkit.event.block.Action
 import org.bukkit.event.player.PlayerInteractEvent
@@ -38,7 +39,7 @@ import java.util.concurrent.ThreadLocalRandom
 
     @EventHandler
     fun onUse(event: PlayerInteractEvent){
-        if(event.isCancelled) return
+        if(event.useItemInHand() == Event.Result.DENY) return
         if(event.action != Action.RIGHT_CLICK_BLOCK && event.action != Action.RIGHT_CLICK_AIR) return
         val item = event.item ?: return
         if(!compare(item)) return
