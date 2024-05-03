@@ -4,6 +4,7 @@ import items.AbstractRLItem
 import net.kyori.adventure.text.Component
 import net.kyori.adventure.text.format.TextColor
 import net.kyori.adventure.text.format.TextDecoration
+import org.bukkit.GameMode
 import org.bukkit.Material
 import org.bukkit.NamespacedKey
 import org.bukkit.event.EventHandler
@@ -61,6 +62,7 @@ object BackpackItem: AbstractRLItem {
     fun onBackpackOpen(event: PlayerInteractEvent){
         if(event.action != Action.RIGHT_CLICK_AIR && event.action != Action.RIGHT_CLICK_BLOCK) return
         if(!event.isBlockInHand) return
+        if(event.player.gameMode == GameMode.SPECTATOR) return
 
         val backpackItem = event.player.inventory.itemInMainHand
         if(!compare(backpackItem)) return

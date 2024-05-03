@@ -4,10 +4,7 @@ import items.AbstractRLItem
 import net.kyori.adventure.text.Component
 import net.kyori.adventure.text.format.TextColor
 import net.kyori.adventure.text.format.TextDecoration
-import org.bukkit.Bukkit
-import org.bukkit.Material
-import org.bukkit.NamespacedKey
-import org.bukkit.Particle
+import org.bukkit.*
 import org.bukkit.entity.Player
 import org.bukkit.event.EventHandler
 import org.bukkit.event.block.Action
@@ -113,6 +110,7 @@ object KalykItem: AbstractRLItem {
     fun onKalykRefill(event: PlayerInteractEvent){
         if(event.action != Action.RIGHT_CLICK_BLOCK && event.action != Action.RIGHT_CLICK_AIR) return
         if(!event.player.isSneaking) return
+        if(event.player.gameMode == GameMode.SPECTATOR) return
         val kalykItem = event.player.inventory.itemInOffHand
         val kalykFuel = event.player.inventory.itemInMainHand
 

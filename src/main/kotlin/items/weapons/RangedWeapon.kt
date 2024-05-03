@@ -75,6 +75,7 @@ interface RangedWeapon: AbstractRLItem {
     fun checkItemAsAmmo(item: ItemStack) : Boolean
     @EventHandler
     fun onShoot(event: PlayerInteractEvent){
+        if(event.player.gameMode == GameMode.SPECTATOR) return
         // preliminary checks
         if(event.action != Action.RIGHT_CLICK_AIR && event.action != Action.RIGHT_CLICK_BLOCK) return
         val weapon = event.item ?: return

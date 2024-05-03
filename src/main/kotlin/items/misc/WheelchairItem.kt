@@ -5,6 +5,7 @@ import mobs.Wheelchair
 import net.kyori.adventure.text.Component
 import net.kyori.adventure.text.format.TextColor
 import net.kyori.adventure.text.format.TextDecoration
+import org.bukkit.GameMode
 import org.bukkit.Material
 import org.bukkit.event.EventHandler
 import org.bukkit.event.block.Action
@@ -35,6 +36,7 @@ object WheelchairItem: AbstractRLItem {
 
     @EventHandler
     fun onUse(event: PlayerInteractEvent){
+        if(event.player.gameMode == GameMode.SPECTATOR) return
         if(event.action != Action.RIGHT_CLICK_BLOCK) return
         val item = event.item ?: return
         if(!compare(item)) return

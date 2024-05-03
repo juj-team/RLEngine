@@ -3,6 +3,7 @@ package items.misc
 import ailments.MoonInfection
 import items.AbstractRLItem
 import net.kyori.adventure.text.Component
+import org.bukkit.GameMode
 import org.bukkit.Material
 import org.bukkit.event.Event
 import org.bukkit.event.EventHandler
@@ -39,6 +40,7 @@ import java.util.concurrent.ThreadLocalRandom
 
     @EventHandler
     fun onUse(event: PlayerInteractEvent){
+        if(event.player.gameMode == GameMode.SPECTATOR) return
         if(event.useItemInHand() == Event.Result.DENY) return
         if(event.action != Action.RIGHT_CLICK_BLOCK && event.action != Action.RIGHT_CLICK_AIR) return
         val item = event.item ?: return

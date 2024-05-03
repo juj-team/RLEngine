@@ -3,6 +3,7 @@ package items.weapons
 import items.AbstractRLItem
 import net.kyori.adventure.text.Component
 import org.bukkit.DyeColor
+import org.bukkit.GameMode
 import org.bukkit.Material
 import org.bukkit.entity.EntityType
 import org.bukkit.entity.Shulker
@@ -28,6 +29,7 @@ object WeaponTableSummonerItem: AbstractRLItem {
 
     @EventHandler
     fun onPlace(event: PlayerInteractEvent){
+        if(event.player.gameMode == GameMode.SPECTATOR) return
         if(event.action != Action.RIGHT_CLICK_BLOCK) return
         if(!event.isBlockInHand) return
 

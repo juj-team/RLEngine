@@ -4,6 +4,7 @@ import gui.WeaponTableGui
 import items.weapons.WeaponTableSummonerItem
 import net.kyori.adventure.text.Component
 import org.bukkit.DyeColor
+import org.bukkit.GameMode
 import org.bukkit.entity.EntityType
 import org.bukkit.entity.Shulker
 import org.bukkit.event.EventHandler
@@ -13,6 +14,7 @@ import org.bukkit.event.player.PlayerInteractAtEntityEvent
 object WeaponTableInteractor: Listener {
     @EventHandler
     fun onTableClick(event: PlayerInteractAtEntityEvent){
+        if(event.player.gameMode == GameMode.SPECTATOR) return
         val table = event.rightClicked
         if(event.isCancelled || table.type != EntityType.SHULKER || table !is Shulker) return
         if(table.customName() != Component.text("gun") || table.color != DyeColor.BLACK) return
