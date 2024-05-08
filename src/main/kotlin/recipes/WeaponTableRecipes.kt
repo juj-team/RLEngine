@@ -107,12 +107,12 @@ enum class WeaponTableRecipes(
     MACHINE_GUN(
         base = {item -> RevolverGunItem.compare(item)},
         modifier = {item ->
-            SmoothBarrelItem.compare(item) },
+            ShotgunMagItem.compare(item) && item.amount >= 3},
         metal = {item -> item.amount >= 48
                 && item.type == Material.IRON_INGOT},
         result = {weapon, modifier, metal, fuel ->
             weapon.amount -= 1
-            modifier.amount -= 1
+            modifier.amount -= 3
             metal.amount -= 48
             fuel.amount -= 1
             MachineGunItem.getItem() }
