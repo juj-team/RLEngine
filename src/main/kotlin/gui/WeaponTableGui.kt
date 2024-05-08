@@ -30,7 +30,7 @@ class WeaponTableGui(private val shulker: Shulker) {
         "Сверху кладётся оружие,",
         "Справа - топливо",
         "слева обычно помещается металл,",
-        "а снизу - дополнительный ингридиент"
+        "а снизу - дополнительный ингредиент"
     )
     private val weaponElement = GuiStorageElement('W', Bukkit.createInventory(null, InventoryType.CHEST))
     private val metalElement  = GuiStorageElement('I', Bukkit.createInventory(null, InventoryType.CHEST))
