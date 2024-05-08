@@ -16,9 +16,9 @@ object BiomeWarmness : TemperatureCalculator {
             Biome.RIVER to 15.0,
             // cursed biomes
             Biome.BADLANDS to 35.0,
-            Biome.ERODED_BADLANDS to -42.0,
+            Biome.ERODED_BADLANDS to 42.0,
             Biome.COLD_OCEAN to -65.0,
-            Biome.DARK_FOREST to -20.0,
+            Biome.DARK_FOREST to 20.0,
             Biome.DEEP_OCEAN to -20.0,
             Biome.DESERT to 40.0,
             Biome.FROZEN_RIVER to -65.0,
@@ -28,7 +28,7 @@ object BiomeWarmness : TemperatureCalculator {
             Biome.SNOWY_PLAINS to -63.0,
             Biome.SNOWY_SLOPES to -63.0,
             Biome.SNOWY_TAIGA to  -63.0,
-            Biome.SWAMP to -5.0,
+            Biome.SWAMP to 15.0,
             Biome.TAIGA to -58.0,
             )
 
