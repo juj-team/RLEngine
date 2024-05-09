@@ -18,7 +18,7 @@ import org.bukkit.potion.PotionEffect
 import org.bukkit.potion.PotionEffectType
 
 object HeavyRifleWeaponItem: RangedWeapon {
-    override val cooldown: Int = 60
+    override val cooldown: Int = 80
     override val magCapacity: Int = 1
     override val model: Int = 44402
     override val id: String = "heavy_rifle_gun"
