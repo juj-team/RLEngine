@@ -1,6 +1,7 @@
 package items.weapons.guns
 
 import items.weapons.RangedWeapon
+import items.weapons.modifiers.AmmoModifiers
 import net.kyori.adventure.text.Component
 import net.kyori.adventure.text.format.TextColor
 import net.kyori.adventure.text.format.TextDecoration
@@ -24,7 +25,7 @@ object HeavyRifleWeaponItem: RangedWeapon {
     override val id: String = "heavy_rifle_gun"
     
     override fun checkItemAsAmmo(item: ItemStack): Boolean {
-        return item.type == Material.ARROW
+        return item.type == Material.ARROW && (AmmoModifiers.hasModifier(item, AmmoModifiers.BIG_AMMO) || AmmoModifiers.hasModifier(item, AmmoModifiers.BONE_BREAKER))
     }
 
     override fun onInventoryTick(player: Player, item: ItemStack) {
@@ -40,7 +41,7 @@ object HeavyRifleWeaponItem: RangedWeapon {
             player.eyeLocation.direction.multiply(6)
         )
         arrow.pickupStatus = AbstractArrow.PickupStatus.DISALLOWED
-        arrow.damage = 5.0* (3/6.0)
+        arrow.damage = 5.0 * (3/6.0)
         player.world.playSound(
             player.location,
             Sound.BLOCK_ANVIL_LAND,
