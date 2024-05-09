@@ -40,7 +40,7 @@ object HeavyRifleWeaponItem: RangedWeapon {
             player.eyeLocation.direction.multiply(6)
         )
         arrow.pickupStatus = AbstractArrow.PickupStatus.DISALLOWED
-        arrow.damage = 10.0
+        arrow.damage = 5.0* (3/6.0)
         player.world.playSound(
             player.location,
             Sound.BLOCK_ANVIL_LAND,

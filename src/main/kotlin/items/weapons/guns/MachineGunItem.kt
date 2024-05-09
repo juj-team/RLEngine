@@ -38,7 +38,7 @@ object MachineGunItem: RangedWeapon {
             player.eyeLocation.direction.multiply(3)
         )
         arrow.pickupStatus = AbstractArrow.PickupStatus.DISALLOWED
-        arrow.damage = 14.0
+        arrow.damage = 4.5
         arrow.persistentDataContainer
         player.world.playSound(
             player.location,

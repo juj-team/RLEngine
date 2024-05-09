@@ -29,7 +29,7 @@ object RevolverGunItem: RangedWeapon {
             player.eyeLocation.direction.multiply(4.5)
         )
         arrow.pickupStatus = AbstractArrow.PickupStatus.DISALLOWED
-        arrow.damage = 10.0
+        arrow.damage = 5.0 * (3/4.5)
         player.world.playSound(
             player.location,
             Sound.ITEM_CROSSBOW_SHOOT,

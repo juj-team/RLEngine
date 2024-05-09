@@ -30,7 +30,7 @@ object LightRifleGunItem: RangedWeapon {
             player.eyeLocation.direction.multiply(4.5)
         )
         arrow.pickupStatus = AbstractArrow.PickupStatus.DISALLOWED
-        arrow.damage = 12.0
+        arrow.damage = 4.0 * (3/4.5)
         player.world.playSound(
             player.location,
             Sound.ITEM_CROSSBOW_SHOOT,
