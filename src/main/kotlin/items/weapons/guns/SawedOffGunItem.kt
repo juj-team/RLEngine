@@ -57,7 +57,7 @@ object SawedOffGunItem: RangedWeapon {
 
             )
         arrows.forEach{it.pickupStatus = AbstractArrow.PickupStatus.DISALLOWED}
-        arrows.forEach { it.damage = 17.0 }
+        arrows.forEach { it.damage = 8.4 }
         player.world.playSound(
             player.location,
             Sound.ITEM_CROSSBOW_SHOOT,
