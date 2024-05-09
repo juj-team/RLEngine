@@ -10,6 +10,7 @@ import org.bukkit.SoundCategory
 import org.bukkit.entity.AbstractArrow
 import org.bukkit.entity.Arrow
 import org.bukkit.entity.Player
+import org.bukkit.entity.Projectile
 import org.bukkit.inventory.ItemStack
 import org.bukkit.inventory.meta.ItemMeta
 import org.bukkit.persistence.PersistentDataContainer
@@ -18,6 +19,7 @@ object ShotgunGunItem: RangedWeapon {
     override val cooldown: Int = 70
     override val magCapacity: Int = 1
     override val model: Int = 44407
+    override val maxWeaponDamage: Int = 256
     override val id: String = "shotgun_gun"
     
     override fun checkItemAsAmmo(item: ItemStack): Boolean {
@@ -49,7 +51,8 @@ object ShotgunGunItem: RangedWeapon {
 
         )
         arrows.forEach{it.pickupStatus = AbstractArrow.PickupStatus.DISALLOWED}
-        arrows.forEach { it.damage = 4.5 * (3/4.0) }
+        arrows.forEach { it.damage = 4.5 * (3/4.0)
+            transferModifierDataToEntity(it as Projectile, weapon, ItemStack(Material.ARROW)) }
         player.world.playSound(
             player.location,
             Sound.ITEM_CROSSBOW_SHOOT,

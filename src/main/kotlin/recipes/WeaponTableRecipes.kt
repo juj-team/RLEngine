@@ -1,5 +1,6 @@
 package recipes
 
+import gameclass.RLEngineGameClass
 import items.weapons.guns.*
 import items.weapons.modifiers.AmmoModifiers
 import items.weapons.modifiers.WeaponModifiers
@@ -7,6 +8,7 @@ import items.weapons.parts.*
 import net.kyori.adventure.text.Component
 import net.kyori.adventure.text.format.TextColor
 import org.bukkit.Material
+import org.bukkit.entity.Player
 import org.bukkit.inventory.ItemStack
 
 enum class WeaponTableRecipes(
@@ -14,6 +16,7 @@ enum class WeaponTableRecipes(
     val modifier: (item: ItemStack) -> Boolean,
     val metal: (item: ItemStack) -> Boolean,
     val fuel: (item: ItemStack) -> Boolean = {item -> item.type == Material.BLAZE_ROD},
+    val crafter: (crafter: Player) -> Boolean = {_ -> true},
     val result: (weapon: ItemStack, modifier: ItemStack, metal: ItemStack, fuel: ItemStack) -> ItemStack
 ) {
     // base weapon creation
@@ -146,6 +149,11 @@ enum class WeaponTableRecipes(
                 org.bukkit.persistence.PersistentDataType.BOOLEAN,
                 true
             )
+            val lore = if(resultMeta.hasLore()) resultMeta.lore() else mutableListOf<Component>()
+            lore?.add(
+                Component.text("Установлен штык", TextColor.color(150,150,150))
+            )
+            resultMeta.lore(lore)
             result.setItemMeta(resultMeta)
             weapon.amount -= 1
             modifier.amount -= 1
@@ -178,6 +186,11 @@ enum class WeaponTableRecipes(
                 org.bukkit.persistence.PersistentDataType.BOOLEAN,
                 true
             )
+            val lore = if(resultMeta.hasLore()) resultMeta.lore() else mutableListOf<Component>()
+            lore?.add(
+                Component.text("Установлен фитиль", TextColor.color(150,150,150))
+            )
+            resultMeta.lore(lore)
             result.setItemMeta(resultMeta)
             weapon.amount -= 1
             modifier.amount -= 1
@@ -210,6 +223,11 @@ enum class WeaponTableRecipes(
                 org.bukkit.persistence.PersistentDataType.BOOLEAN,
                 true
             )
+            val lore = if(resultMeta.hasLore()) resultMeta.lore() else mutableListOf<Component>()
+            lore?.add(
+                Component.text("Установлен крюк", TextColor.color(150,150,150))
+            )
+            resultMeta.lore(lore)
             result.setItemMeta(resultMeta)
             weapon.amount -= 1
             modifier.amount -= 1
@@ -242,6 +260,11 @@ enum class WeaponTableRecipes(
                 org.bukkit.persistence.PersistentDataType.BOOLEAN,
                 true
             )
+            val lore = if(resultMeta.hasLore()) resultMeta.lore() else mutableListOf<Component>()
+            lore?.add(
+                Component.text("Установлен гранатомёт", TextColor.color(150,150,150))
+            )
+            resultMeta.lore(lore)
             result.setItemMeta(resultMeta)
             weapon.amount -= 1
             modifier.amount -= 1
@@ -265,6 +288,9 @@ enum class WeaponTableRecipes(
             WeaponNetItem.compare(item) },
         metal = {item -> item.amount >= 6
                 && item.type == Material.IRON_INGOT},
+        crafter = { crafter ->
+            RLEngineGameClass.getClass(crafter) == gameclass.RLEngineGameClass.HEADHUNTER
+        },
         result = {weapon, modifier, metal, fuel ->
             val modKey = WeaponModifiers.NETS.key
             val result = weapon.clone()
@@ -274,6 +300,11 @@ enum class WeaponTableRecipes(
                 org.bukkit.persistence.PersistentDataType.BOOLEAN,
                 true
             )
+            val lore = if(resultMeta.hasLore()) resultMeta.lore() else mutableListOf<Component>()
+            lore?.add(
+                Component.text("Установлена сеть", TextColor.color(150,150,150))
+            )
+            resultMeta.lore(lore)
             result.setItemMeta(resultMeta)
             weapon.amount -= 1
             modifier.amount -= 1
@@ -297,6 +328,9 @@ enum class WeaponTableRecipes(
             WeaponLightningItem.compare(item) },
         metal = {item -> item.amount >= 6
                 && item.type == Material.IRON_INGOT},
+        crafter = { crafter ->
+            RLEngineGameClass.getClass(crafter) == gameclass.RLEngineGameClass.ENGINEER
+        },
         result = {weapon, modifier, metal, fuel ->
             val modKey = WeaponModifiers.LIGHTNING.key
             val result = weapon.clone()
@@ -306,6 +340,51 @@ enum class WeaponTableRecipes(
                 org.bukkit.persistence.PersistentDataType.BOOLEAN,
                 true
             )
+            val lore = if(resultMeta.hasLore()) resultMeta.lore() else mutableListOf<Component>()
+            lore?.add(
+                Component.text("Установлен громоотвод", TextColor.color(150,150,150))
+            )
+            resultMeta.lore(lore)
+            result.setItemMeta(resultMeta)
+            weapon.amount -= 1
+            modifier.amount -= 1
+            metal.amount -= 6
+            fuel.amount -= 1
+            result
+        }
+    ),
+    BULDYGA_UPGRADE(
+        base = {item ->
+            val gunsWhitelist = listOf(
+                CollapseRifleGunItem,
+                LightRifleGunItem,
+            )
+            // comparison code
+            var result = false
+            gunsWhitelist.forEach{if(it.compare(item)) result = true; return@forEach}
+            result
+        },
+        modifier = {item ->
+            BuldygaItem.compare(item) },
+        metal = {item -> item.amount >= 6
+                && item.type == Material.IRON_INGOT},
+        crafter = { crafter ->
+            RLEngineGameClass.getClass(crafter) == gameclass.RLEngineGameClass.MAGE
+        },
+        result = {weapon, modifier, metal, fuel ->
+            val modKey = WeaponModifiers.BULDYGA.key
+            val result = weapon.clone()
+            val resultMeta = result.itemMeta
+            resultMeta.persistentDataContainer.set(
+                modKey,
+                org.bukkit.persistence.PersistentDataType.BOOLEAN,
+                true
+            )
+            val lore = if(resultMeta.hasLore()) resultMeta.lore() else mutableListOf<Component>()
+            lore?.add(
+                Component.text("Установлен булдыга", TextColor.color(95,80,100))
+            )
+            resultMeta.lore(lore)
             result.setItemMeta(resultMeta)
             weapon.amount -= 1
             modifier.amount -= 1
@@ -441,11 +520,13 @@ enum class WeaponTableRecipes(
     ),
     ;
     companion object{
-        fun getRecipeByIngredients(weapon: ItemStack, metal: ItemStack, modifier: ItemStack, fuel: ItemStack): ItemStack? {
+        fun getRecipeByIngredients(weapon: ItemStack, metal: ItemStack, modifier: ItemStack, crafter: Player, fuel: ItemStack): ItemStack? {
             val targetRecipe = WeaponTableRecipes.entries
+                .asSequence()
                 .filter{it.base(weapon)}
                 .filter{it.metal(metal)}
                 .filter{it.fuel(fuel)}
+                .filter{it.crafter(crafter)}
                 .firstOrNull { it.modifier(modifier) } ?: return null
             return targetRecipe.result(weapon, modifier, metal, fuel)
         }

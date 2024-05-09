@@ -10,6 +10,7 @@ import org.bukkit.Material
 import org.bukkit.Sound
 import org.bukkit.SoundCategory
 import org.bukkit.entity.HumanEntity
+import org.bukkit.entity.Player
 import org.bukkit.entity.Shulker
 import org.bukkit.event.inventory.InventoryType
 import org.bukkit.inventory.ItemStack
@@ -65,7 +66,7 @@ class WeaponTableGui(private val shulker: Shulker) {
         val player = click.whoClicked
         val tableContents = getTableContents(player)
         // pass them to a function
-        val resultItem = craftFromItems(tableContents)
+        val resultItem = craftFromItems(tableContents, player as Player)
         // if result is not null - replace the top element and play sound
         if(resultItem != null){
             player.world.dropItemNaturally(player.location, resultItem)
@@ -81,11 +82,12 @@ class WeaponTableGui(private val shulker: Shulker) {
             click.gui.close(player, true)
         }
     }
-    private fun craftFromItems(tableContents: WeaponTableSlotContents): ItemStack? {
+    private fun craftFromItems(tableContents: WeaponTableSlotContents, crafter: Player): ItemStack? {
         return WeaponTableRecipes.getRecipeByIngredients(
         tableContents.weapon ?: return null,
         tableContents.metal ?: return null,
         tableContents.modifier ?: return null,
+            crafter,
         tableContents.fuel ?: return null
         )
     }

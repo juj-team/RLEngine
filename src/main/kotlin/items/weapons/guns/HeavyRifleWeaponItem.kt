@@ -12,6 +12,7 @@ import org.bukkit.SoundCategory
 import org.bukkit.entity.AbstractArrow
 import org.bukkit.entity.Arrow
 import org.bukkit.entity.Player
+import org.bukkit.entity.Projectile
 import org.bukkit.inventory.ItemStack
 import org.bukkit.inventory.meta.ItemMeta
 import org.bukkit.persistence.PersistentDataContainer
@@ -22,10 +23,11 @@ object HeavyRifleWeaponItem: RangedWeapon {
     override val cooldown: Int = 80
     override val magCapacity: Int = 1
     override val model: Int = 44402
+    override val maxWeaponDamage: Int = 256
     override val id: String = "heavy_rifle_gun"
     
     override fun checkItemAsAmmo(item: ItemStack): Boolean {
-        return item.type == Material.ARROW && (AmmoModifiers.hasModifier(item, AmmoModifiers.BIG_AMMO) || AmmoModifiers.hasModifier(item, AmmoModifiers.BONE_BREAKER))
+        return item.type == Material.ARROW && (AmmoModifiers.hasModifier(item.itemMeta.persistentDataContainer, AmmoModifiers.BIG_AMMO) || AmmoModifiers.hasModifier(item.itemMeta.persistentDataContainer, AmmoModifiers.BONE_BREAKER))
     }
 
     override fun onInventoryTick(player: Player, item: ItemStack) {
@@ -41,7 +43,8 @@ object HeavyRifleWeaponItem: RangedWeapon {
             player.eyeLocation.direction.multiply(6)
         )
         arrow.pickupStatus = AbstractArrow.PickupStatus.DISALLOWED
-        arrow.damage = 5.0 * (3/6.0)
+        arrow.damage = 3.0
+        transferModifierDataToEntity(arrow as Projectile, weapon, ItemStack(Material.ARROW))
         player.world.playSound(
             player.location,
             Sound.BLOCK_ANVIL_LAND,

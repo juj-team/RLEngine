@@ -17,6 +17,7 @@ object RocketGunItem : RangedWeapon {
     override val cooldown: Int = 20
     override val magCapacity: Int = 1
     override val model: Int = 44406
+    override val maxWeaponDamage: Int = 256
     override val id: String = "rocket_gun"
     
 

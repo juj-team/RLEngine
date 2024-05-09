@@ -1,7 +1,7 @@
 package items.weapons.modifiers
 
 import org.bukkit.NamespacedKey
-import org.bukkit.inventory.ItemStack
+import org.bukkit.persistence.PersistentDataContainer
 
 enum class AmmoModifiers(val key: NamespacedKey) {
     BIG_AMMO(NamespacedKey("rle", "big_ammo")),
@@ -11,8 +11,8 @@ enum class AmmoModifiers(val key: NamespacedKey) {
     WEAKENING(NamespacedKey("rle", "weakening_ammo")),
     ;
     companion object{
-        fun hasModifier(ammo: ItemStack, mod: AmmoModifiers): Boolean{
-            return ammo.itemMeta.persistentDataContainer.has(mod.key)
+        fun hasModifier(ammoData: PersistentDataContainer, mod: AmmoModifiers): Boolean{
+            return ammoData.has(mod.key)
         }
     }
 }
