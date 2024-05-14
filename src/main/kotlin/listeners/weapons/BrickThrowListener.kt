@@ -23,7 +23,7 @@ object BrickThrowListener: Listener {
         item.amount -= 1
         val brick = player.launchProjectile(
             Snowball::class.java,
-            player.eyeLocation.direction.multiply(0.5)
+            player.eyeLocation.direction.multiply(0.5).add(player.velocity)
         )
         brick.item = ItemStack(Material.BRICK)
     }
