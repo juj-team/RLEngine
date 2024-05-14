@@ -56,6 +56,11 @@ commands:
     permission: rl_engine.about
     permission-message: ""
     usage: "Usage: /radiolamp"
+  quests:
+    description: Main quests command. Use /quests help for more info!
+    permission: rl_engine.quests
+    permission-message: ""
+    usage: "Usage: /quests [argument]"
 
 
 permissions:
@@ -82,5 +87,7 @@ permissions:
       default: true
     rl_engine.set_lives:
       default: op
+    rl_engine.quests:
+      default: true
     rl_engine.about:
       default: true
