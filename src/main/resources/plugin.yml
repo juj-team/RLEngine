@@ -29,11 +29,6 @@ commands:
     aliases: [diseases]
     permission-message: ""
     usage: "Usage: /ailments [id] [status|toggle] [player]"
-  classdialog:
-    description: you are not supposed to be here.
-    permission: rl_engine.classdialog
-    permission-message: ""
-    usage: "fuck you"
   snowstorm:
     description: Start a snowstorm in your world.
     permission: rl_engine.snowstorm
@@ -79,8 +74,6 @@ permissions:
       default: op
     rl_engine.ailments:
       default: op
-    rl_engine.classdialog:
-      default: true
     rl_engine.snowstorm:
       default: op
     rl_engine.bug_report:

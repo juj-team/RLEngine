@@ -7,7 +7,7 @@ import listeners.metaphysics.BedDisabler
 import listeners.metaphysics.CorpseInteractionListener
 import listeners.metaphysics.PlayerDeathListener
 import listeners.metaphysics.PlayerJoinListener
-import listeners.quests.QuestedPlayerExitListener
+import listeners.quests.QuestedPlayerTerminationListener
 import listeners.temperature.TempBarCreator
 import listeners.temperature.TempBarDeleter
 import listeners.weapons.BrickThrowListener
@@ -34,7 +34,7 @@ object RLEngineListeners {
         SkeletonDropsRemover,
         ModifierListener,
         BrickThrowListener,
-        QuestedPlayerExitListener
+        QuestedPlayerTerminationListener
     )
     init {
         registerKnownListeners()

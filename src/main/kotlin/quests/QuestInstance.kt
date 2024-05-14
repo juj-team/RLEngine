@@ -9,6 +9,8 @@ import org.bukkit.entity.Player
 import org.bukkit.inventory.ItemStack
 import org.bukkit.inventory.meta.BundleMeta
 import org.bukkit.persistence.PersistentDataType
+import org.bukkit.potion.PotionEffect
+import org.bukkit.potion.PotionEffectType
 
 class QuestInstance(val player: Player, val story: Story) {
     enum class AdvanceState{
@@ -19,6 +21,11 @@ class QuestInstance(val player: Player, val story: Story) {
     val bundleContents = bundleItem.itemMeta as BundleMeta
     init{
         advance(-1)
+        player.addPotionEffect(PotionEffect(PotionEffectType.INVISIBILITY, 20 * 9999999, 0, false, false, false))
+        player.addPotionEffect(PotionEffect(PotionEffectType.SATURATION, 20 * 9999999, 0, false, false, false))
+        player.addPotionEffect(PotionEffect(PotionEffectType.HEAL, 20 * 9999999, 10, false, false, false))
+        player.addPotionEffect(PotionEffect(PotionEffectType.SLOW, 20 * 9999999, 127, false, false, false))
+        player.addPotionEffect(PotionEffect(PotionEffectType.JUMP, 20 * 9999999, 127, false, false, false))
     }
     fun advance(choiceIndex: Int): AdvanceState{
         if(choiceIndex > -1){
@@ -46,6 +53,11 @@ class QuestInstance(val player: Player, val story: Story) {
             PersistentDataType.BOOLEAN,
             false
         )
+        player.removePotionEffect(PotionEffectType.INVISIBILITY)
+        player.removePotionEffect(PotionEffectType.SATURATION)
+        player.removePotionEffect(PotionEffectType.HEAL)
+        player.removePotionEffect(PotionEffectType.SLOW)
+        player.removePotionEffect(PotionEffectType.JUMP)
     }
     fun giveBundle(){
         bundleItem.setItemMeta(bundleContents)
