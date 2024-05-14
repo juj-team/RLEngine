@@ -2,6 +2,7 @@ package quests
 
 import RadioLampEngine
 import gameclass.RLEngineGameClass
+import org.bukkit.Bukkit
 import org.bukkit.Location
 import org.bukkit.Material
 import org.bukkit.NamespacedKey
@@ -37,7 +38,8 @@ object JulyInkInstructionParser {
         "tp" to ::teleportCommand,
         "setclass" to ::setClassCommand,
         "clear" to ::clearCommand,
-        "satchel" to ::satchelCommand
+        "satchel" to ::satchelCommand,
+        "advancement" to ::advancementCommand
     )
 
     data class JulyInkInstruction(val i: String, val args: List<String>)
@@ -63,7 +65,16 @@ object JulyInkInstructionParser {
             }
         }
     }
-
+    private fun advancementCommand(args: List<String>, questInstance: QuestInstance){
+        if(args.size < 2){
+            logger.warning("Illegal instruction state: advancement! (Caused by ${questInstance.player.name}), line ${questInstance.story.currentText})")
+            return
+        }
+        val adv = questInstance.player.getAdvancementProgress(Bukkit.getAdvancement(NamespacedKey(args[0], args[1])) ?: return)
+        for(criteria in adv.remainingCriteria){
+            adv.awardCriteria(criteria)
+        }
+    }
     private fun lockCommand(args: List<String>, questInstance: QuestInstance){
         if(args.isEmpty()){
             logger.warning("Illegal instruction state: lock! (Caused by ${questInstance.player.name})")
