@@ -31,9 +31,7 @@ enum class WeaponModifiers(val key: NamespacedKey, val executor: (shooter: Entit
         if(Random.nextInt(1..100) < 15) {
             if (victim != null) {
                 victim.location.world.createExplosion(victim.location, 1.0f, false, true)
-            } else if (block != null) {
-                block.location.world.createExplosion(block.location, 1.0f, false, true)
-            }
+            } else block?.location?.world?.createExplosion(block.location, 1.0f, false, true)
         }
     }),
     NETS(NamespacedKey("rle", "has_nets"), { _, victim, _ ->
@@ -49,9 +47,7 @@ enum class WeaponModifiers(val key: NamespacedKey, val executor: (shooter: Entit
         if(Random.nextInt(1..100) < 10) {
             if (victim != null) {
                 victim.location.world.strikeLightning(victim.location)
-            } else if (block != null) {
-                block.location.world.strikeLightning(block.location)
-            }
+            } else block?.location?.world?.strikeLightning(block.location)
         }
     }),
     BULDYGA(NamespacedKey("rle", "has_buldyga"), { shooter, victim, _ ->

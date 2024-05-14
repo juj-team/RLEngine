@@ -7,7 +7,7 @@ import org.bukkit.event.player.PlayerJoinEvent
 import org.bukkit.scoreboard.Team
 
 object PlayerNameHider: Listener {
-    val allowedTeamNames = listOf(
+    private val allowedTeamNames = listOf(
         "HideName",
         "jujplus",
         "miners",

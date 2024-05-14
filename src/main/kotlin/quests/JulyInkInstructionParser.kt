@@ -29,8 +29,9 @@ import org.bukkit.persistence.PersistentDataType
 - формат инструкций \[инструкция]:<аргументы>
 - разделитель ;
  */
+@Suppress("UnstableApiUsage")
 object JulyInkInstructionParser {
-    val executors = mapOf(
+    private val executors = mapOf(
         "lock" to ::lockCommand,
         "give" to ::giveCommand,
         "tp" to ::teleportCommand,
@@ -40,7 +41,7 @@ object JulyInkInstructionParser {
     )
 
     data class JulyInkInstruction(val i: String, val args: List<String>)
-    val logger = RadioLampEngine.instance.logger
+    private val logger = RadioLampEngine.instance.logger
     fun parse(rawTags: List<String>, questInstance: QuestInstance){
         val rawInstructions = rawTags.map{it.split(" ")}
 

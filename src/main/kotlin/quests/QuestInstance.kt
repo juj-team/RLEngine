@@ -12,12 +12,13 @@ import org.bukkit.persistence.PersistentDataType
 import org.bukkit.potion.PotionEffect
 import org.bukkit.potion.PotionEffectType
 
+@Suppress("UnstableApiUsage")
 class QuestInstance(val player: Player, val story: Story) {
     enum class AdvanceState{
         ADVANCE,
         FINISH
     }
-    val bundleItem = ItemStack(Material.BUNDLE)
+    private val bundleItem = ItemStack(Material.BUNDLE)
     val bundleContents = bundleItem.itemMeta as BundleMeta
     init{
         advance(-1)
