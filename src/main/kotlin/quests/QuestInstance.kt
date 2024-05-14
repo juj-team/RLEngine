@@ -2,8 +2,12 @@ package quests
 
 import com.bladecoder.ink.runtime.Story
 import net.kyori.adventure.text.minimessage.MiniMessage
+import org.bukkit.Material
 import org.bukkit.NamespacedKey
+import org.bukkit.Sound
 import org.bukkit.entity.Player
+import org.bukkit.inventory.ItemStack
+import org.bukkit.inventory.meta.BundleMeta
 import org.bukkit.persistence.PersistentDataType
 
 class QuestInstance(val player: Player, val story: Story) {
@@ -11,13 +15,9 @@ class QuestInstance(val player: Player, val story: Story) {
         ADVANCE,
         FINISH
     }
+    val bundleItem = ItemStack(Material.BUNDLE)
+    val bundleContents = bundleItem.itemMeta as BundleMeta
     init{
-        player.persistentDataContainer.set(
-                NamespacedKey("rle", "locked"),
-                PersistentDataType.BOOLEAN,
-            true
-        )
-        clearChat(player)
         advance(-1)
     }
     fun advance(choiceIndex: Int): AdvanceState{
@@ -26,6 +26,7 @@ class QuestInstance(val player: Player, val story: Story) {
         }
         if(story.canContinue()){
             player.sendMessage(MiniMessage.miniMessage().deserialize(story.Continue()))
+            JulyInkInstructionParser.parse(story.currentTags, this)
         }
         if(story.currentChoices.size < 1){
             if(!story.canContinue()) return AdvanceState.FINISH
@@ -46,9 +47,18 @@ class QuestInstance(val player: Player, val story: Story) {
             false
         )
     }
+    fun giveBundle(){
+        bundleItem.setItemMeta(bundleContents)
+        player.playSound(
+            player.location,
+            Sound.ENTITY_ITEM_PICKUP,
+            1.0f,
+            1.0f
+        )
+        if(player.inventory.addItem(bundleItem).size > 0){
+            player.world.dropItemNaturally(player.location, bundleItem)
+        }
 
-    private fun clearChat(player: Player){
-        for(i in 1..100) player.sendMessage(" ")
+        bundleContents.setItems(null)
     }
-
 }

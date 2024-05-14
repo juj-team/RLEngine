@@ -1,7 +1,9 @@
 package quests
 
 import com.bladecoder.ink.runtime.Story
+import org.bukkit.NamespacedKey
 import org.bukkit.entity.Player
+import org.bukkit.persistence.PersistentDataType
 
 object RLEngineQuests {
     private val activeQuests = mutableMapOf<Player, QuestInstance?>()
@@ -27,6 +29,11 @@ object RLEngineQuests {
     fun terminateQuest(player: Player){
         activeQuests[player]?.finish()
         activeQuests[player] = null
+        player.persistentDataContainer.set(
+            NamespacedKey("rle", "locked"),
+            PersistentDataType.BOOLEAN,
+            false
+        )
     }
     fun getAvailableQuests(): List<String>{
         return QuestLoader.getAvailableQuests()
