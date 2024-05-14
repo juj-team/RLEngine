@@ -56,6 +56,12 @@ commands:
     permission: rl_engine.quests
     permission-message: ""
     usage: "Usage: /quests [argument]"
+  sv_cheats:
+    description: How did that one get here?..
+    permission: rl_engine.sv_cheats
+    permission-message: "lmao"
+    usage: "Usage: /sv_cheats [0|1]"
+
 
 
 permissions:
@@ -69,6 +75,7 @@ permissions:
       rl_engine.bug_report: true
       rl_engine.set_lives: true
       rl_engine.about: true
+      rl_engine.sv_cheats: true
 
     rl_engine.get:
       default: op
@@ -83,4 +90,6 @@ permissions:
     rl_engine.quests:
       default: true
     rl_engine.about:
+      default: true
+    rl_engine.sv_cheats:
       default: true
