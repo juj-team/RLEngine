@@ -2,6 +2,7 @@ package items
 
 import RadioLampEngine
 import items.depers.*
+import items.extra.*
 import items.hearts.CookedHeart
 import items.hearts.Heart
 import items.metaphysics.ColdPhoneItem
@@ -66,6 +67,26 @@ object RLEngineItems {
         BuldygaItem,
         BayonetItem,
         BarrelGrenadeItem,
+        // extras
+        BitardHelmet,
+        BlackHat,
+        BrownHat,
+        CactusVodka,
+        CoffeeBottle,
+        CoolGoggles,
+        EcononyMapArt,
+        EnchantedGrapefruit,
+        EnchantedOrange,
+        GurocratHat,
+        HeadLight,
+        KupanieHelmet,
+        OtoBoots,
+        OtoHelmet,
+        RiceBowl,
+        RumBottle,
+        WhiskeyBottle,
+        WorkCap,
+        ZippoLighter,
     )
     init{
         registryElements.forEach { it.createItem() }
