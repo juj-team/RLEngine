@@ -3,6 +3,7 @@ package items.weapons
 import items.AbstractRLItem
 import net.kyori.adventure.text.Component
 import org.bukkit.DyeColor
+import org.bukkit.GameMode
 import org.bukkit.Material
 import org.bukkit.entity.EntityType
 import org.bukkit.entity.Shulker
@@ -13,13 +14,11 @@ import org.bukkit.inventory.ItemStack
 import org.bukkit.inventory.meta.ItemMeta
 import org.bukkit.persistence.PersistentDataContainer
 
-object GunTableSummonerItem: AbstractRLItem {
+object WeaponTableSummonerItem: AbstractRLItem {
     override val baseItem: Material = Material.CHAIN_COMMAND_BLOCK
     override val model: Int = 44436
     override val id: String = "weapon_table"
-    init{
-        this.createItem()
-    }
+    
     override fun getItem(result: ItemStack, resultMeta: ItemMeta, resultPDC: PersistentDataContainer): ItemStack {
         resultMeta.displayName(Component.text("Оружейный стол"))
         resultMeta.setCustomModelData(model)
@@ -30,6 +29,7 @@ object GunTableSummonerItem: AbstractRLItem {
 
     @EventHandler
     fun onPlace(event: PlayerInteractEvent){
+        if(event.player.gameMode == GameMode.SPECTATOR) return
         if(event.action != Action.RIGHT_CLICK_BLOCK) return
         if(!event.isBlockInHand) return
 
@@ -45,5 +45,7 @@ object GunTableSummonerItem: AbstractRLItem {
         shulker.customName(Component.text("gun"))
         shulker.isCustomNameVisible = false
         shulker.color = DyeColor.BLACK
+        shulker.isSilent = true
+        tableItem.amount -= 1
     }
 }

@@ -20,13 +20,12 @@ object GliderItem: AbstractRLItem {
     override val model: Int = 44301
     override val id: String = "glider"
     init{
-        this.createItem()
         RLEngineTaskManager.runTask({
             Bukkit.getOnlinePlayers().filter{
-                val chestpiece = it.inventory.chestplate
-                chestpiece != null && compare(chestpiece)
+                val chestPiece = it.inventory.chestplate
+                chestPiece != null && compare(chestPiece)
             }.forEach{ onInventoryTick(it)}
-        }, 20L, 10L)
+        }, 2L, 10L)
     }
     override fun getItem(result: ItemStack, resultMeta: ItemMeta, resultPDC: PersistentDataContainer): ItemStack {
         resultMeta.setCustomModelData(model)
@@ -40,7 +39,7 @@ object GliderItem: AbstractRLItem {
     }
 
     fun onInventoryTick(player: Player){
-        player.addPotionEffect(PotionEffect(PotionEffectType.SLOW_FALLING, 20*3, 0, false, false, false))
+        player.addPotionEffect(PotionEffect(PotionEffectType.SLOW_FALLING, 30, 0, false, false, false))
 
         val blockUnderFeet = player.location.block.getRelative(BlockFace.DOWN)
         if(blockUnderFeet.type != Material.CAMPFIRE) return

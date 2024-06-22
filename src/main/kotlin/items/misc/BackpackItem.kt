@@ -4,6 +4,7 @@ import items.AbstractRLItem
 import net.kyori.adventure.text.Component
 import net.kyori.adventure.text.format.TextColor
 import net.kyori.adventure.text.format.TextDecoration
+import org.bukkit.GameMode
 import org.bukkit.Material
 import org.bukkit.NamespacedKey
 import org.bukkit.event.EventHandler
@@ -21,7 +22,6 @@ object BackpackItem: AbstractRLItem {
     override val baseItem: Material = Material.CHAIN_COMMAND_BLOCK
     override val model: Int = 44417
     override val id: String = "backpack"
-    init{ this.createItem() }
     override fun getItem(result: ItemStack, resultMeta: ItemMeta, resultPDC: PersistentDataContainer): ItemStack {
         resultMeta.displayName(
             Component.text("Рюкзак", TextColor.color(250,250,250))
@@ -62,6 +62,7 @@ object BackpackItem: AbstractRLItem {
     fun onBackpackOpen(event: PlayerInteractEvent){
         if(event.action != Action.RIGHT_CLICK_AIR && event.action != Action.RIGHT_CLICK_BLOCK) return
         if(!event.isBlockInHand) return
+        if(event.player.gameMode == GameMode.SPECTATOR) return
 
         val backpackItem = event.player.inventory.itemInMainHand
         if(!compare(backpackItem)) return

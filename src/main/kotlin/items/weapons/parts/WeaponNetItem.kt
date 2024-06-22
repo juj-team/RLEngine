@@ -8,7 +8,5 @@ object WeaponNetItem : WeaponPart {
     override val model = 44431
     override val name = Component.text("Сеть").decoration(TextDecoration.ITALIC, false)
 
-    init {
-        this.createItem()
-    }
+
 }

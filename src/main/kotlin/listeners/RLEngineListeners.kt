@@ -1,13 +1,16 @@
 package listeners
 import RadioLampEngine
+import items.weapons.modifiers.ModifierListener
 import listeners.gameclass.MageForgeWhitelist
 import listeners.gameclass.NewPlayerListener
 import listeners.metaphysics.BedDisabler
 import listeners.metaphysics.CorpseInteractionListener
 import listeners.metaphysics.PlayerDeathListener
 import listeners.metaphysics.PlayerJoinListener
+import listeners.quests.QuestedPlayerTerminationListener
 import listeners.temperature.TempBarCreator
 import listeners.temperature.TempBarDeleter
+import listeners.weapons.BrickThrowListener
 import listeners.weapons.SkeletonDropsRemover
 import listeners.weapons.WeaponTableInteractor
 import org.bukkit.Bukkit
@@ -29,6 +32,9 @@ object RLEngineListeners {
         PlayerNameHider,
         WeaponTableInteractor,
         SkeletonDropsRemover,
+        ModifierListener,
+        BrickThrowListener,
+        QuestedPlayerTerminationListener
     )
     init {
         registerKnownListeners()

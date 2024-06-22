@@ -5,6 +5,7 @@ import mobs.Wheelchair
 import net.kyori.adventure.text.Component
 import net.kyori.adventure.text.format.TextColor
 import net.kyori.adventure.text.format.TextDecoration
+import org.bukkit.GameMode
 import org.bukkit.Material
 import org.bukkit.event.EventHandler
 import org.bukkit.event.block.Action
@@ -17,9 +18,7 @@ object WheelchairItem: AbstractRLItem {
     override val baseItem: Material = Material.PIG_SPAWN_EGG
     override val model: Int = 44402
     override val id: String = "wheelchair_spawner"
-    init{
-        this.createItem()
-    }
+    
     override fun getItem(result: ItemStack, resultMeta: ItemMeta, resultPDC: PersistentDataContainer): ItemStack {
         resultMeta.displayName(
             Component.text("ИНВАЛИДНАЯ КОЛЯСКА (ахуеть теперь)", TextColor.color(200,100,250))
@@ -37,6 +36,7 @@ object WheelchairItem: AbstractRLItem {
 
     @EventHandler
     fun onUse(event: PlayerInteractEvent){
+        if(event.player.gameMode == GameMode.SPECTATOR) return
         if(event.action != Action.RIGHT_CLICK_BLOCK) return
         val item = event.item ?: return
         if(!compare(item)) return

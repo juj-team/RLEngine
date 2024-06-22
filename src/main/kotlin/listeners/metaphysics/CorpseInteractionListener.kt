@@ -27,6 +27,7 @@ object CorpseInteractionListener  : Listener {
         )
     @EventHandler
     fun onPlayerCorpseInteraction(event: PlayerInteractAtEntityEvent) {
+        if(event.player.gameMode == GameMode.SPECTATOR) return
         val player = event.player
         val corpse = event.rightClicked
         val corpsePDC = corpse.persistentDataContainer

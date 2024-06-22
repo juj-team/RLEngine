@@ -11,7 +11,7 @@ object ShieldTotemItem: DepersTotemItem {
     override val itemName: String = "Щиток"
     override val model: Int = 12
     override val id: String = "depers_shield"
-    init { this.createItem() }
+    
 
     override fun onInventoryTick(player: Player) {
         if(!compare(player.inventory.itemInOffHand)) return

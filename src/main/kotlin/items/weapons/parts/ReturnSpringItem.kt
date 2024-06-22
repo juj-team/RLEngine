@@ -8,7 +8,5 @@ object ReturnSpringItem : WeaponPart {
     override val model = 44426
     override val name = Component.text("Возвратная пружина").decoration(TextDecoration.ITALIC, false)
 
-    init {
-        this.createItem()
-    }
+
 }

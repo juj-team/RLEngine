@@ -15,9 +15,7 @@ object TestingCrossbowItem: AbstractRLItem {
     override val baseItem: Material = Material.CROSSBOW
     override val model: Int = 44401
     override val id: String = "ultra_crossbow"
-    init{
-        this.createItem()
-    }
+    
     override fun getItem(result: ItemStack, resultMeta: ItemMeta, resultPDC: PersistentDataContainer): ItemStack {
         resultMeta.setCustomModelData(model)
 

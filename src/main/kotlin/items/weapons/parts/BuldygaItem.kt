@@ -8,7 +8,5 @@ object BuldygaItem : WeaponPart {
     override val model = 44435
     override val name = Component.text("Булдыга").decoration(TextDecoration.ITALIC, false)
 
-    init {
-        this.createItem()
-    }
+
 }

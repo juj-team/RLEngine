@@ -8,7 +8,5 @@ object BayonetItem : WeaponPart {
     override val model = 44427
     override val name = Component.text("Штык").decoration(TextDecoration.ITALIC, false)
 
-    init {
-        this.createItem()
-    }
+
 }

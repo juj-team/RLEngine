@@ -15,7 +15,7 @@ object BreezeTotemItem: DepersTotemItem {
     override val itemName: String = "Бриз"
     override val id: String = "depers_breeze"
     private const val RADIUS = 7.0
-    init { this.createItem() }
+    
     override fun onInventoryTick(player: Player) {
         if(!compare(player.inventory.itemInOffHand)) return
         player.addPotionEffect(PotionEffect(PotionEffectType.WATER_BREATHING, 40, 0))

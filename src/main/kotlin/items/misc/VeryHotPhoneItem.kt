@@ -1,7 +1,6 @@
 package items.misc
 
 import items.AbstractRLItem
-import util.RLEngineTaskManager
 import net.kyori.adventure.text.Component
 import net.kyori.adventure.text.format.TextColor
 import org.bukkit.Material
@@ -13,12 +12,12 @@ import org.bukkit.inventory.meta.ItemMeta
 import org.bukkit.persistence.PersistentDataContainer
 import org.bukkit.potion.PotionEffect
 import org.bukkit.potion.PotionEffectType
+import util.RLEngineTaskManager
 
 object VeryHotPhoneItem: AbstractRLItem {
     override val baseItem: Material = Material.TOTEM_OF_UNDYING
     override val model = 44302
     override val id = "very_hot_line"
-    init{ this.createItem() }
     override fun getItem(result: ItemStack, resultMeta: ItemMeta, resultPDC: PersistentDataContainer): ItemStack {
         resultMeta.displayName(Component.text("КРАЙНЕ ГОРЯЧАЯ ЛИНИЯ", TextColor.color(150,250,250)))
         resultMeta.lore(listOf(

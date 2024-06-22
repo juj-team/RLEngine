@@ -8,7 +8,5 @@ object IgniterItem : WeaponPart {
     override val model = 44428
     override val name = Component.text("Фитиль").decoration(TextDecoration.ITALIC, false)
 
-    init {
-        this.createItem()
-    }
+
 }

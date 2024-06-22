@@ -9,7 +9,7 @@ object BottleTotemItem: DepersTotemItem {
     override val itemName: String = "Бутылёк"
     override val model: Int = 2
     override val id: String = "depers_bottle"
-    init { this.createItem() }
+    
 
     override fun onInventoryTick(player: Player) {
         if(!compare(player.inventory.itemInOffHand)) return

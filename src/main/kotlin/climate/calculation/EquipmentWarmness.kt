@@ -34,8 +34,7 @@ object EquipmentWarmness : TemperatureCalculator {
         mapOf(
             Material.HEART_OF_THE_SEA to -10.0,
             Material.SOUL_LANTERN to -5.0,
-            Material.LANTERN to 3.0,
-            Material.TORCH to 5.0,
+            Material.TORCH to 3.0,
             Material.LAVA_BUCKET to 10.0,
             Material.NETHER_STAR to 20.0,
         )

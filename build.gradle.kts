@@ -36,7 +36,8 @@ dependencies {
     compileOnly("LibsDisguises:LibsDisguises:10.0.42")
     // https://github.com/Phoenix616/InventoryGui
     implementation("de.themoep:inventorygui:1.6.2-SNAPSHOT")
-
+    // https://mvnrepository.com/artifact/com.bladecoder.ink/blade-ink
+    implementation("com.bladecoder.ink:blade-ink:1.1.2")
 
     paperweight.paperDevBundle("1.19.4-R0.1-SNAPSHOT")
 }

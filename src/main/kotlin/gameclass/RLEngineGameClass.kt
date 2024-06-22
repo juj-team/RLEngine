@@ -18,30 +18,15 @@ enum class RLEngineGameClass(val id: String) {
                     NamespacedKey("jujclasses", "playerclass"),
                     PersistentDataType.STRING,
                 )
-
-            return when (playerClass) {
-                "citizen" -> {
-                    CITIZEN
-                }
-
-                "engineer" -> {
-                    ENGINEER
-                }
-
-                "mage" -> {
-                    MAGE
-                }
-
-                "headhunter" -> {
-                    HEADHUNTER
-                }
-
-                "businessman" -> {
-                    BUSINESSMAN
-                }
-
-                else -> null
-            }
+            return RLEngineGameClass.entries.firstOrNull { it.id == playerClass }
+        }
+        fun getClass(id: String) = RLEngineGameClass.entries.firstOrNull { it.id == id }
+        fun setClass(player: Player, gameClass: RLEngineGameClass){
+            player.persistentDataContainer.set(
+                NamespacedKey("jujclasses", "playerclass"),
+                PersistentDataType.STRING,
+                gameClass.id
+            )
         }
     }
 }

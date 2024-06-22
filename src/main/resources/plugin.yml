@@ -29,11 +29,6 @@ commands:
     aliases: [diseases]
     permission-message: ""
     usage: "Usage: /ailments [id] [status|toggle] [player]"
-  classdialog:
-    description: you are not supposed to be here.
-    permission: rl_engine.classdialog
-    permission-message: ""
-    usage: "fuck you"
   snowstorm:
     description: Start a snowstorm in your world.
     permission: rl_engine.snowstorm
@@ -56,6 +51,17 @@ commands:
     permission: rl_engine.about
     permission-message: ""
     usage: "Usage: /radiolamp"
+  quests:
+    description: Main quests command. Use /quests help for more info!
+    permission: rl_engine.quests
+    permission-message: ""
+    usage: "Usage: /quests [argument]"
+  sv_cheats:
+    description: How did that one get here?..
+    permission: rl_engine.sv_cheats
+    permission-message: "lmao"
+    usage: "Usage: /sv_cheats [0|1]"
+
 
 
 permissions:
@@ -69,18 +75,21 @@ permissions:
       rl_engine.bug_report: true
       rl_engine.set_lives: true
       rl_engine.about: true
+      rl_engine.sv_cheats: true
 
     rl_engine.get:
       default: op
     rl_engine.ailments:
       default: op
-    rl_engine.classdialog:
-      default: true
     rl_engine.snowstorm:
       default: op
     rl_engine.bug_report:
       default: true
     rl_engine.set_lives:
       default: op
+    rl_engine.quests:
+      default: true
     rl_engine.about:
+      default: true
+    rl_engine.sv_cheats:
       default: true

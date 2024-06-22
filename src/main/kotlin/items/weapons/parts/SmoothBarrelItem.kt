@@ -8,7 +8,5 @@ object SmoothBarrelItem : WeaponPart {
     override val model = 44423
     override val name = Component.text("Гладкий ствол").decoration(TextDecoration.ITALIC, false)
 
-    init {
-        this.createItem()
-    }
+
 }

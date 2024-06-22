@@ -7,7 +7,7 @@ object ToasterTotemItem: DepersTotemItem {
     override val itemName: String = "Тостер"
     override val model: Int = 13
     override val id: String = "depers_toaster"
-    init { this.createItem() }
+    
 
     override fun onInventoryTick(player: Player) {
         // в пизду

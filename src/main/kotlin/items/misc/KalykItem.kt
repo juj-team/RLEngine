@@ -4,10 +4,7 @@ import items.AbstractRLItem
 import net.kyori.adventure.text.Component
 import net.kyori.adventure.text.format.TextColor
 import net.kyori.adventure.text.format.TextDecoration
-import org.bukkit.Bukkit
-import org.bukkit.Material
-import org.bukkit.NamespacedKey
-import org.bukkit.Particle
+import org.bukkit.*
 import org.bukkit.entity.Player
 import org.bukkit.event.EventHandler
 import org.bukkit.event.block.Action
@@ -25,14 +22,14 @@ object KalykItem: AbstractRLItem {
     override val baseItem: Material = Material.PETRIFIED_OAK_SLAB
     override val model: Int = 0
     override val id: String = "hookah"
-    val fuelKey = NamespacedKey("rle", "fuel")
+    private val fuelKey = NamespacedKey("rle", "fuel")
     private val allowedFuels: Map<Material, Int> = mapOf(
         Material.APPLE to 1,
         Material.CARROT to 2,
         Material.GLOW_BERRIES to 3,
         Material.HONEYCOMB to 4
     )
-    val fuels = mapOf(
+    private val fuels = mapOf(
         0 to listOf(
             PotionEffect(PotionEffectType.LUCK, 20*3, 0, true, false, false)
         ),
@@ -57,7 +54,6 @@ object KalykItem: AbstractRLItem {
         ),
     )
     init {
-        this.createItem()
         RLEngineTaskManager.runTask({
             Bukkit.getOnlinePlayers().filter{
                 val offhand = it.inventory.itemInOffHand
@@ -114,6 +110,7 @@ object KalykItem: AbstractRLItem {
     fun onKalykRefill(event: PlayerInteractEvent){
         if(event.action != Action.RIGHT_CLICK_BLOCK && event.action != Action.RIGHT_CLICK_AIR) return
         if(!event.player.isSneaking) return
+        if(event.player.gameMode == GameMode.SPECTATOR) return
         val kalykItem = event.player.inventory.itemInOffHand
         val kalykFuel = event.player.inventory.itemInMainHand
 

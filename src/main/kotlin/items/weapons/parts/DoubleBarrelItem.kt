@@ -8,7 +8,5 @@ object DoubleBarrelItem : WeaponPart {
     override val model = 44425
     override val name = Component.text("Двойной ствол").decoration(TextDecoration.ITALIC, false)
 
-    init {
-        this.createItem()
-    }
+
 }

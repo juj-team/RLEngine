@@ -1,6 +1,9 @@
 package climate
 
-import climate.calculation.*
+import climate.calculation.BiomeWarmness
+import climate.calculation.EquipmentWarmness
+import climate.calculation.LightWarmness
+import climate.calculation.WeatherWarmness
 import org.bukkit.Bukkit
 import org.bukkit.NamespacedKey
 import org.bukkit.boss.BarColor
@@ -15,10 +18,8 @@ object TemperatureCalculator {
         listOf(
             EquipmentWarmness,
             BiomeWarmness,
-            HeightWarmness,
             LightWarmness,
             WeatherWarmness,
-            EnvironmentWarmness,
         )
     private val temperatureSettings = TemperatureSettings
     private val temperatureKey = NamespacedKey("rle", "climate")

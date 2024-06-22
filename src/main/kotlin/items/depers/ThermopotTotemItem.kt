@@ -13,7 +13,7 @@ object ThermopotTotemItem: DepersTotemItem {
     override val model: Int = 10
     override val id: String = "depers_thermo"
     private const val RADIUS = 5.0
-    init { this.createItem() }
+    
 
     override fun onInventoryTick(player: Player) {
         if(!compare(player.inventory.itemInOffHand)) return

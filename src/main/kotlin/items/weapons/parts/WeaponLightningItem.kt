@@ -8,7 +8,5 @@ object WeaponLightningItem : WeaponPart {
     override val model = 44434
     override val name = Component.text("Громоотвод").decoration(TextDecoration.ITALIC, false)
 
-    init {
-        this.createItem()
-    }
+
 }

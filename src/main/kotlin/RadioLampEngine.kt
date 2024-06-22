@@ -5,9 +5,11 @@ import items.RLEngineItems
 import listeners.RLEngineListeners
 import org.bukkit.Bukkit
 import org.bukkit.NamespacedKey
+import org.bukkit.command.CommandExecutor
 import org.bukkit.persistence.PersistentDataType
 import org.bukkit.plugin.Plugin
 import org.bukkit.plugin.java.JavaPlugin
+import quests.RLEngineQuests
 import recipes.RLEngineRecipes
 import util.InventoryDeserialiser
 import util.InventorySerialiser
@@ -15,20 +17,23 @@ import util.RLEngineTaskManager
 import java.io.File
 
 class RadioLampEngine: JavaPlugin() {
-    private val commandExecutors = mapOf(
+    private val commandExecutors = mapOf<String, CommandExecutor>(
         "get" to GetCommand(),
         "ailments" to AilmentsCommand(),
-        "classdialog" to ClassDialogCommand(),
         "snowstorm" to SnowstormCommand(),
         "bug_report" to BugReportCommand(),
         "set_lives" to SetLivesCommand(),
-        "radiolamp" to AboutCommandExecutor()
+        "radiolamp" to AboutCommandExecutor(),
+        "quests" to QuestsCommandExecutor(),
+        "sv_cheats" to StanleyEasterEggCommand()
     )
+    private val backpackFolder = File(this.dataFolder.absolutePath + "/backpacks")
+    private val questFolder = File(this.dataFolder.absolutePath + "/quests")
     override fun onEnable() {
         // creating directories
         if (!this.dataFolder.exists()) this.dataFolder.mkdir()
-        val backpackFolder = File(this.dataFolder.absolutePath + "/backpacks")
         if(!backpackFolder.exists()) backpackFolder.mkdir()
+        if(!questFolder.exists()) questFolder.mkdir()
 
         // Command registration
         commandExecutors.forEach {
@@ -45,6 +50,7 @@ class RadioLampEngine: JavaPlugin() {
         RLEngineItems
         RLEngineAilments
         RLEngineRecipes
+        RLEngineQuests
     }
     override fun onDisable(){
         // remove all weather locks

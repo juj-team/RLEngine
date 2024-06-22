@@ -3,7 +3,9 @@ package items.misc
 import ailments.MoonInfection
 import items.AbstractRLItem
 import net.kyori.adventure.text.Component
+import org.bukkit.GameMode
 import org.bukkit.Material
+import org.bukkit.event.Event
 import org.bukkit.event.EventHandler
 import org.bukkit.event.block.Action
 import org.bukkit.event.player.PlayerInteractEvent
@@ -14,7 +16,7 @@ import org.bukkit.potion.PotionEffect
 import org.bukkit.potion.PotionEffectType
 import java.util.concurrent.ThreadLocalRandom
 
-    object MoondustItem: AbstractRLItem {
+    object MoonDustItem: AbstractRLItem {
     override val baseItem: Material = Material.WHITE_DYE
     override val model: Int = 44401
     override val id: String = "moon_dust"
@@ -27,9 +29,7 @@ import java.util.concurrent.ThreadLocalRandom
         PotionEffect(PotionEffectType.REGENERATION, 20*60*10, 0),
         PotionEffect(PotionEffectType.SPEED, 20*60*10, 1),
     )
-    init{
-        this.createItem()
-    }
+    
     override fun getItem(result: ItemStack, resultMeta: ItemMeta, resultPDC: PersistentDataContainer): ItemStack {
         resultMeta.setCustomModelData(model)
         resultMeta.displayName(Component.text("Лунная пыль"))
@@ -40,7 +40,8 @@ import java.util.concurrent.ThreadLocalRandom
 
     @EventHandler
     fun onUse(event: PlayerInteractEvent){
-        if(event.isCancelled) return
+        if(event.player.gameMode == GameMode.SPECTATOR) return
+        if(event.useItemInHand() == Event.Result.DENY) return
         if(event.action != Action.RIGHT_CLICK_BLOCK && event.action != Action.RIGHT_CLICK_AIR) return
         val item = event.item ?: return
         if(!compare(item)) return

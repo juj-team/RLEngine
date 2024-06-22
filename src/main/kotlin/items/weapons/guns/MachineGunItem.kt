@@ -10,29 +10,38 @@ import org.bukkit.SoundCategory
 import org.bukkit.entity.AbstractArrow
 import org.bukkit.entity.Arrow
 import org.bukkit.entity.Player
+import org.bukkit.entity.Projectile
 import org.bukkit.inventory.ItemStack
 import org.bukkit.inventory.meta.ItemMeta
 import org.bukkit.persistence.PersistentDataContainer
+import org.bukkit.potion.PotionEffect
+import org.bukkit.potion.PotionEffectType
 
 object MachineGunItem: RangedWeapon {
     override val cooldown: Int = 0
     override val magCapacity: Int = 64
     override val model: Int = 44404
+    override val maxWeaponDamage: Int = 12800
     override val id: String = "machine_gun"
-    init{
-        this.createItem()
-    }
+    
     override fun checkItemAsAmmo(item: ItemStack): Boolean {
         return item.type == Material.ARROW
     }
 
+    override fun onInventoryTick(player: Player, item: ItemStack) {
+        super.onInventoryTick(player, item)
+        player.addPotionEffect(
+            PotionEffect(PotionEffectType.SLOW, 20*2, 127, false, false, false)
+        )
+    }
     override fun shoot(player: Player, weapon: ItemStack) {
         val arrow = player.launchProjectile(
             Arrow::class.java,
             player.eyeLocation.direction.multiply(3)
         )
         arrow.pickupStatus = AbstractArrow.PickupStatus.DISALLOWED
-        arrow.damage = 12.0
+        arrow.damage = 4.5
+        transferModifierDataToEntity(arrow as Projectile, weapon, ItemStack(Material.ARROW))
         arrow.persistentDataContainer
         player.world.playSound(
             player.location,

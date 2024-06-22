@@ -12,16 +12,16 @@ import java.util.*
 object TempBarCreator: Listener {
     @EventHandler
     fun createBarOnJoin(event: PlayerJoinEvent) {
-        val namespacedKey = NamespacedKey("rle", event.player.uniqueId.toString().lowercase(Locale.getDefault()))
+        val namespaceKey = NamespacedKey("rle", event.player.uniqueId.toString().lowercase(Locale.getDefault()))
 
         // удалить старые боссбары
-        val oldBossbar = Bukkit.getBossBar(namespacedKey)
+        val oldBossbar = Bukkit.getBossBar(namespaceKey)
         oldBossbar?.removeAll()
-        Bukkit.removeBossBar(namespacedKey)
+        Bukkit.removeBossBar(namespaceKey)
 
         val bossbar =
             Bukkit.createBossBar(
-                namespacedKey,
+                namespaceKey,
                 "рот болит и попе больно",
                 BarColor.PINK,
                 BarStyle.SEGMENTED_12,
