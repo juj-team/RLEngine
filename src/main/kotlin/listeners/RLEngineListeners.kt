@@ -1,6 +1,7 @@
 package listeners
 import RadioLampEngine
 import items.weapons.modifiers.ModifierListener
+import listeners.gameclass.EnchantingTableDisabler
 import listeners.gameclass.MageForgeWhitelist
 import listeners.gameclass.NewPlayerListener
 import listeners.metaphysics.BedDisabler
