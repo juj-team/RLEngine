@@ -37,6 +37,8 @@ object RLEngineItems {
         WheelchairItem,
         KalykItem,
         MoonDustItem,
+        HandDrill,
+        SmeltingPickaxe,
         // metaphysics,
         ColdPhoneItem,
         Heart,
