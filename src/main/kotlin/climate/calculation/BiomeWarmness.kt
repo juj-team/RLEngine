@@ -34,7 +34,7 @@ object BiomeWarmness : TemperatureCalculator {
 
     override fun calculate(player: Player): Double {
         if (player.world.environment == World.Environment.NETHER) return 44.0
-        if (player.world.environment == World.Environment.THE_END) return -99.0
+        if (player.world.environment == World.Environment.THE_END) return -15.0
 
         return temperatures[player.location.block.biome] ?: 15.0
     }

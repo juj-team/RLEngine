@@ -10,7 +10,7 @@ import org.bukkit.inventory.meta.ItemMeta
 import org.bukkit.persistence.PersistentDataContainer
 
 object HeadLight : AbstractRLItem {
-    override val baseItem: Material = Material.CARVED_PUMPKIN
+    override val baseItem: Material = Material.LANTERN
     override val model: Int = 44301
     override val id: String = "bitard_helmet"
 
@@ -22,6 +22,8 @@ object HeadLight : AbstractRLItem {
                 Component.text("Наденьте командой /hat", TextColor.color(200,200,200)).decoration(TextDecoration.ITALIC, false)
             )
         )
+
+        resultMeta.setCustomModelData(model)
 
         result.setItemMeta(resultMeta)
         return result
