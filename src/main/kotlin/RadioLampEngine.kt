@@ -3,6 +3,8 @@ import ailments.RLEngineAilments
 import commands.*
 import items.RLEngineItems
 import listeners.RLEngineListeners
+import net.coreprotect.CoreProtect
+import net.coreprotect.CoreProtectAPI
 import org.bukkit.Bukkit
 import org.bukkit.NamespacedKey
 import org.bukkit.command.CommandExecutor
@@ -17,6 +19,8 @@ import util.RLEngineTaskManager
 import java.io.File
 
 class RadioLampEngine: JavaPlugin() {
+    var coreProtectAPI: CoreProtectAPI? = null
+
     private val commandExecutors = mapOf<String, CommandExecutor>(
         "get" to GetCommand(),
         "ailments" to AilmentsCommand(),
@@ -30,6 +34,8 @@ class RadioLampEngine: JavaPlugin() {
     private val backpackFolder = File(this.dataFolder.absolutePath + "/backpacks")
     private val questFolder = File(this.dataFolder.absolutePath + "/quests")
     override fun onEnable() {
+        coreProtectAPI = getCoreProtect()
+
         // creating directories
         if (!this.dataFolder.exists()) this.dataFolder.mkdir()
         if(!backpackFolder.exists()) backpackFolder.mkdir()
@@ -66,5 +72,17 @@ class RadioLampEngine: JavaPlugin() {
     }
     companion object{
         lateinit var instance: Plugin
+    }
+
+    private fun getCoreProtect(): CoreProtectAPI? {
+        val plugin: Plugin? = server.pluginManager.getPlugin("CoreProtect")
+
+        if (plugin !is CoreProtect) {
+            return null
+        }
+
+        val coreProtect = plugin.api
+
+        return if (coreProtect.isEnabled) coreProtect else null
     }
 }

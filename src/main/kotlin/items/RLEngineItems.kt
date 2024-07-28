@@ -5,7 +5,7 @@ import items.depers.*
 import items.extra.*
 import items.hearts.CookedHeart
 import items.hearts.Heart
-import items.metaphysics.ColdPhoneItem
+import items.metaphysics.*
 import items.misc.*
 import items.weapons.WeaponTableSummonerItem
 import items.weapons.guns.*
@@ -43,6 +43,11 @@ object RLEngineItems {
         ColdPhoneItem,
         Heart,
         CookedHeart,
+        // anti-depers armor
+        AntiDepersHelmetItem,
+        AntiDepersChestplateItem,
+        AntiDepersLeggingsItem,
+        AntiDepersBootsItem,
         // weapons,
         TestingCrossbowItem,
         RocketGunItem,
