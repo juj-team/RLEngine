@@ -10,6 +10,7 @@ import org.bukkit.entity.Player
 import org.bukkit.event.EventHandler
 import org.bukkit.event.Listener
 import org.bukkit.event.player.PlayerInteractAtEntityEvent
+import org.bukkit.inventory.InventoryView
 import org.bukkit.inventory.ItemStack
 import org.bukkit.persistence.PersistentDataType
 import java.util.*
@@ -81,14 +82,17 @@ object CorpseInteractionListener  : Listener {
             )
             return
         }
-        // Otherwise open player's inventory
-        if (associatedPlayerUUID != null) {
-            val associatedPlayer = getPlayerByUUIDString(associatedPlayerUUID)
-            if (associatedPlayer != null) {
-                val view = event.player.openInventory(associatedPlayer.inventory)
-                view?.title = "Труп ${associatedPlayer.name}"
-            }
-        }
+        openGraveInventory(event, associatedPlayerUUID)
+    }
+
+    private fun openGraveInventory(event: PlayerInteractAtEntityEvent, associatedPlayerUUID: String?) {
+        if (!event.player.hasPermission("rl_engine.open_corpses")) return
+        if (associatedPlayerUUID == null) return
+
+        val associatedPlayer = getPlayerByUUIDString(associatedPlayerUUID) ?: return
+
+        val view = event.player.openInventory(associatedPlayer.inventory)
+        view?.title = "Труп ${associatedPlayer.name}"
     }
 
     private fun resurrectPlayer(

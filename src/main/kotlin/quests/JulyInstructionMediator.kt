@@ -53,7 +53,6 @@ object JulyInstructionMediator {
 
         val executor = executors.getValue(instructionData.name)
         executor(instructionData.args, questInstance)
-        println(instructionData.name)
     }
 
     fun dispatch(instructionsData: List<JulyInkInstruction>, questInstance: QuestInstance) {

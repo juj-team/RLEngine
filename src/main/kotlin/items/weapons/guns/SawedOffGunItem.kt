@@ -56,10 +56,10 @@ object SawedOffGunItem: RangedWeapon {
                 Arrow::class.java,
                 player.eyeLocation.direction.multiply(5).rotateAroundY(Math.toRadians(-9.5))
             ),
+        )
 
-            )
         arrows.forEach{it.pickupStatus = AbstractArrow.PickupStatus.DISALLOWED}
-        arrows.forEach { it.damage = 4.5 * (3/5)
+        arrows.forEach { it.damage = 4.5 * (3/5.0)
             transferModifierDataToEntity(it as Projectile, weapon, ItemStack(Material.ARROW)) }
         player.world.playSound(
             player.location,
