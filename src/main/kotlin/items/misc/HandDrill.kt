@@ -57,6 +57,7 @@ object HandDrill : AbstractRLItem {
     fun onBlockBreak(event: BlockBreakEvent) {
         val activeItem = event.player.inventory.itemInMainHand
         if (!compare(activeItem)) return
+        if (event.player.isSneaking) return
 
         val positionDelta = event.block.location.subtract(event.player.location)
         val rawCoordinates = listOf(positionDelta.x, positionDelta.y, positionDelta.z)
