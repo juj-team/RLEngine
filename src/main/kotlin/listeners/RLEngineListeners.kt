@@ -35,6 +35,7 @@ object RLEngineListeners {
         BrickThrowListener,
         QuestedPlayerTerminationListener,
         NoDebugDupe,
+        HeadHunterDrop,
     )
     init {
         registerKnownListeners()
