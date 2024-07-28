@@ -1,5 +1,6 @@
 package listeners
 import RadioLampEngine
+import listeners.depers.DepersInteraction
 import items.weapons.modifiers.ModifierListener
 import listeners.gameclass.*
 import listeners.metaphysics.BedDisabler
@@ -35,6 +36,7 @@ object RLEngineListeners {
         BrickThrowListener,
         QuestedPlayerTerminationListener,
         NoDebugDupe,
+        DepersInteraction,
         HeadHunterDrop,
     )
     init {

@@ -21,6 +21,9 @@ repositories {
     maven {
         url = uri("https://repo.minebench.de")
     }
+    maven {
+        url = uri("https://maven.playpro.com")
+    }
 }
 dependencies {
     implementation(kotlin("reflect"))
@@ -38,6 +41,8 @@ dependencies {
     implementation("de.themoep:inventorygui:1.6.2-SNAPSHOT")
     // https://mvnrepository.com/artifact/com.bladecoder.ink/blade-ink
     implementation("com.bladecoder.ink:blade-ink:1.1.2")
+    // https://maven.playpro.com/net/coreprotect/coreprotect/
+    compileOnly("net.coreprotect:coreprotect:22.1")
 
     paperweight.paperDevBundle("1.19.4-R0.1-SNAPSHOT")
 }
