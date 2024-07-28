@@ -1,10 +1,7 @@
 package listeners
 import RadioLampEngine
 import items.weapons.modifiers.ModifierListener
-import listeners.gameclass.EnchantingTableDisabler
-import listeners.gameclass.MageForgeWhitelist
-import listeners.gameclass.NewPlayerListener
-import listeners.gameclass.NoDebugOnKalyk
+import listeners.gameclass.*
 import listeners.metaphysics.BedDisabler
 import listeners.metaphysics.CorpseInteractionListener
 import listeners.metaphysics.PlayerDeathListener
@@ -37,7 +34,7 @@ object RLEngineListeners {
         ModifierListener,
         BrickThrowListener,
         QuestedPlayerTerminationListener,
-        NoDebugOnKalyk,
+        NoDebugDupe,
     )
     init {
         registerKnownListeners()
