@@ -6,6 +6,7 @@ import net.kyori.adventure.text.format.TextColor
 import org.bukkit.Bukkit
 import org.bukkit.Material
 import org.bukkit.inventory.Inventory
+import org.bukkit.inventory.InventoryHolder
 import org.bukkit.inventory.ItemStack
 import org.bukkit.util.io.BukkitObjectInputStream
 import org.yaml.snakeyaml.external.biz.base64Coder.Base64Coder
@@ -15,12 +16,20 @@ import java.io.File
 import java.io.IOException
 import java.nio.file.Files
 
+
+class BackpackInventoryHolder(val id: Long) : InventoryHolder {
+    override fun getInventory(): Inventory {
+        return InventoryDeserialiser.loadFromFile(id)
+    }
+
+}
+
 object InventoryDeserialiser {
     @Throws(IOException::class)
     fun loadFromFile(id: Long): Inventory {
         val backpackFile = File(RadioLampEngine.instance.dataFolder.absolutePath + "/backpacks/$id")
         val resultInv = Bukkit.createInventory(
-            null,
+            BackpackInventoryHolder(id),
             18,
             Component.text("Рюкзак", TextColor.color(0,170,0))
         )
