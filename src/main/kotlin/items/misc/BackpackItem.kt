@@ -9,12 +9,15 @@ import org.bukkit.Material
 import org.bukkit.NamespacedKey
 import org.bukkit.event.EventHandler
 import org.bukkit.event.block.Action
+import org.bukkit.event.inventory.InventoryAction
+import org.bukkit.event.inventory.InventoryClickEvent
 import org.bukkit.event.inventory.InventoryCloseEvent
 import org.bukkit.event.player.PlayerInteractEvent
 import org.bukkit.inventory.ItemStack
 import org.bukkit.inventory.meta.ItemMeta
 import org.bukkit.persistence.PersistentDataContainer
 import org.bukkit.persistence.PersistentDataType
+import util.BackpackInventoryHolder
 import util.InventoryDeserialiser
 import util.InventorySerialiser
 
@@ -42,22 +45,46 @@ object BackpackItem: AbstractRLItem {
         result.setItemMeta(resultMeta)
         return result
     }
+
     @EventHandler
-    fun onBackpackClose(event: InventoryCloseEvent){
-        val backpackItem = event.player.inventory.itemInMainHand
-        if(!compare(backpackItem)) return
-        if(event.view.title() != Component.text("Рюкзак", TextColor.color(0,170,0))) return
-        if(event.reason == InventoryCloseEvent.Reason.DISCONNECT) return
-        val backpackID = backpackItem.itemMeta.persistentDataContainer.get(
+    fun onBackpackClose(event: InventoryCloseEvent) {
+        if (event.inventory.holder !is BackpackInventoryHolder) return
+        val holder = event.inventory.holder as BackpackInventoryHolder
+        if (event.reason == InventoryCloseEvent.Reason.DISCONNECT) return
+
+        InventorySerialiser.saveToFile(
+            holder.id,
+            event.inventory,
+        )
+    }
+
+    @EventHandler
+    fun onBackpackDrop(event: InventoryClickEvent) {
+        val droppedItem = if (event.currentItem != null) event.currentItem else event.cursor
+        if (droppedItem == null) return
+
+        val actions = listOf(
+            InventoryAction.DROP_ALL_SLOT,
+            InventoryAction.DROP_ONE_SLOT,
+            InventoryAction.DROP_ALL_CURSOR,
+            InventoryAction.DROP_ONE_CURSOR,
+        )
+
+        if (event.action !in actions) return
+        if (!compare(droppedItem)) return
+
+
+        val inventoryHolder = event.view.topInventory.holder as? BackpackInventoryHolder ?: return
+        val backpackID = droppedItem.itemMeta.persistentDataContainer.get(
             NamespacedKey("jujmiscs", "backpackid"),
             PersistentDataType.LONG
         ) ?: return
 
-        InventorySerialiser.saveToFile(
-            backpackID,
-            event.inventory
-        )
+        if (inventoryHolder.id != backpackID) return
+
+        event.view.close()
     }
+
     @EventHandler
     fun onBackpackOpen(event: PlayerInteractEvent){
         if(event.action != Action.RIGHT_CLICK_AIR && event.action != Action.RIGHT_CLICK_BLOCK) return
@@ -74,5 +101,7 @@ object BackpackItem: AbstractRLItem {
 
         val queuedInv = InventoryDeserialiser.loadFromFile(backpackID)
         event.player.openInventory(queuedInv)
+
+        event.isCancelled = true
     }
 }
