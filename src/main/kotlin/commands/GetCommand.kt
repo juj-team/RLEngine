@@ -12,15 +12,22 @@ class GetCommand: CommandExecutor, TabCompleter {
         sender: CommandSender,
         cmd: Command,
         alias: String,
-        args: Array<String>
+        args: Array<String>,
     ): Boolean {
         if(sender !is Player) return true
         if(args.isEmpty()) return false
 
-        val id = args[0]
-        val item = RLEngineItems.fetchItem(id) ?: return true
+        val username = args[0]
+        val player = sender.server.getPlayer(username) ?: return true
 
-        sender.inventory.addItem(item.getItem())
+        val itemNames = args.slice(1 until args.size)
+        val items = itemNames.map { RLEngineItems.fetchItem(it) }
+
+        for (item in items) {
+            if (item == null) continue
+            player.inventory.addItem(item.getItem())
+        }
+
         return true
     }
 
@@ -28,9 +35,13 @@ class GetCommand: CommandExecutor, TabCompleter {
         sender: CommandSender,
         cmd: Command,
         alias: String,
-        args: Array<String>
+        args: Array<String>,
     ): List<String> {
-        return RLEngineItems.getItems().filter{it.startsWith(args.last(), ignoreCase = true)}
+        if (args.size == 1) {
+            return sender.server.onlinePlayers.map { it.name }.filter { it.startsWith(args.last()) }
+        }
+
+        return RLEngineItems.getItems().filter { it.startsWith(args.last(), ignoreCase = true) }
     }
 
 }
