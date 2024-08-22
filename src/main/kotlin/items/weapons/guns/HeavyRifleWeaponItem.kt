@@ -63,7 +63,7 @@ object HeavyRifleWeaponItem: RangedWeapon {
     override fun getItem(result: ItemStack, resultMeta: ItemMeta, resultPDC: PersistentDataContainer): ItemStack {
         resultMeta.setCustomModelData(model)
         resultMeta.displayName(
-            Component.text("БОЛЬШАЯ СУКА", TextColor.color(250, 200, 0)).decoration(
+            Component.text("Крупнокалиберная винтовка", TextColor.color(250, 200, 0)).decoration(
                 TextDecoration.ITALIC, false))
 
         result.setItemMeta(resultMeta)

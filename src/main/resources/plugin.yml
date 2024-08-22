@@ -47,6 +47,11 @@ commands:
     permission: rl_engine.set_lives
     permission-message: ""
     usage: "Usage: /set_lives [player] [amount]"
+  get_lives:
+    description: Get amount of lives for a player.
+    permission: rl_engine.get_lives
+    permission-message: ""
+    usage: "Usage: /set_lives [player]"
   radiolamp:
     description: Radio Lamp Engine credits.
     permission: rl_engine.about
@@ -75,6 +80,7 @@ permissions:
       rl_engine.snowstorm: true
       rl_engine.bug_report: true
       rl_engine.set_lives: true
+      rl_engine.get_lives: true
       rl_engine.about: true
       rl_engine.sv_cheats: true
       rl_engine.open_corpses: true
@@ -88,6 +94,8 @@ permissions:
     rl_engine.bug_report:
       default: true
     rl_engine.set_lives:
+      default: op
+    rl_engine.get_lives:
       default: op
     rl_engine.quests:
       default: true

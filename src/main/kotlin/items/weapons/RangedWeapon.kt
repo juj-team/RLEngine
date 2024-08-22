@@ -33,8 +33,15 @@ interface RangedWeapon: AbstractRLItem {
         RLEngineTaskManager.runTask({
             Bukkit.getOnlinePlayers().filter{
                 val mainHandItem = it.inventory.itemInMainHand
-                compare(mainHandItem)
-            }.forEach{ onInventoryTick(it, it.inventory.itemInMainHand) }
+                val offHandItem = it.inventory.itemInOffHand
+                compare(mainHandItem) || compare(offHandItem)
+            }.forEach {
+                val mainHandItem = it.inventory.itemInMainHand
+                val offHandItem = it.inventory.itemInOffHand
+
+                if (compare(mainHandItem)) onInventoryTick(it, mainHandItem)
+                if (compare(offHandItem)) onInventoryTick(it, offHandItem)
+            }
         }, 2L, 1L)
     }
 

@@ -29,7 +29,8 @@ class RadioLampEngine: JavaPlugin() {
         "set_lives" to SetLivesCommand(),
         "radiolamp" to AboutCommandExecutor(),
         "quests" to QuestsCommandExecutor(),
-        "sv_cheats" to StanleyEasterEggCommand()
+        "sv_cheats" to StanleyEasterEggCommand(),
+        "get_lives" to GetLivesCommand(),
     )
     private val backpackFolder = File(this.dataFolder.absolutePath + "/backpacks")
     private val questFolder = File(this.dataFolder.absolutePath + "/quests")

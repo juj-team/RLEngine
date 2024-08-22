@@ -71,7 +71,7 @@ enum class WeaponTableRecipes(
     REVOLVER(
         base = {item -> item.type == Material.CROSSBOW},
         modifier = {item ->
-            FileInstrumentItem.compare(item) },
+            RevolverDrumItem.compare(item) },
         metal = {item -> item.amount >= 6
                 && item.type == Material.IRON_INGOT},
         result = {weapon, modifier, metal, fuel ->

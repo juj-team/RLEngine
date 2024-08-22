@@ -74,6 +74,7 @@ object RLEngineItems {
         BuldygaItem,
         BayonetItem,
         BarrelGrenadeItem,
+        RevolverDrumItem,
         // extras
         BitardHelmet,
         BlackHat,
@@ -94,6 +95,9 @@ object RLEngineItems {
         WhiskeyBottle,
         WorkCap,
         ZippoLighter,
+        CardboardShieldItem,
+        NightGogglesItem,
+        PowerGlovesItem,
     )
     init{
         registryElements.forEach { it.createItem() }
