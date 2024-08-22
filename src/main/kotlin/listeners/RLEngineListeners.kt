@@ -2,6 +2,7 @@ package listeners
 import RadioLampEngine
 import listeners.depers.DepersInteraction
 import items.weapons.modifiers.ModifierListener
+import listeners.datafixer.DataFixerListener
 import listeners.gameclass.*
 import listeners.metaphysics.BedDisabler
 import listeners.metaphysics.CorpseInteractionListener
@@ -38,6 +39,9 @@ object RLEngineListeners {
         NoDebugDupe,
         DepersInteraction,
         HeadHunterDrop,
+        DataFixerListener,
+        NoCustomJukeboxPlacement,
+        HatRightButtonWearListener,
     )
     init {
         registerKnownListeners()

@@ -10,9 +10,9 @@ import org.bukkit.entity.Player
 import org.bukkit.event.EventHandler
 import org.bukkit.event.Listener
 import org.bukkit.event.player.PlayerInteractAtEntityEvent
-import org.bukkit.inventory.InventoryView
 import org.bukkit.inventory.ItemStack
 import org.bukkit.persistence.PersistentDataType
+import util.metaphysics.Lives
 import java.util.*
 
 object CorpseInteractionListener  : Listener {
@@ -51,13 +51,23 @@ object CorpseInteractionListener  : Listener {
         // If they do - check if corpse player is online and resurrect them.
         // Return from function after resurrection
         val isResurrecting = player.inventory.getItem(event.hand).type == Material.TOTEM_OF_UNDYING
+
+
         if (isResurrecting && associatedPlayerUUID != null) {
             val associatedPlayer = getPlayerByUUIDString(associatedPlayerUUID)
+
             if (associatedPlayer == null) {
                 player.sendMessage(playerNotOnlineMessage)
                 return
             }
-            resurrectPlayer(associatedPlayer, corpse, player.inventory.getItem(event.hand))
+
+            if (Lives.get(associatedPlayer) > 0) {
+                resurrectPlayer(associatedPlayer, corpse, player.inventory.getItem(event.hand))
+            }
+            else {
+                player.sendMessage("С того конца лишь вечные гудки.")
+            }
+
             return
         }
         // Drop a heart or cooked heart if corpse has one.

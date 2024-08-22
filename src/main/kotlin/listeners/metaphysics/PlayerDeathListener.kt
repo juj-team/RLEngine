@@ -22,6 +22,8 @@ object PlayerDeathListener: Listener {
     fun onPlayerDeath(event: PlayerDeathEvent){
         if(event.isCancelled) return
         val player = event.player
+        if (player.gameMode == GameMode.SPECTATOR) return
+
         Lives.applyDelta(player, -1)
         val playerLivesLimit = Lives.getLimit(player)
         // Check for special death clauses: VOID and FIRE
@@ -29,16 +31,18 @@ object PlayerDeathListener: Listener {
         val diedInVoid = deathCause == EntityDamageEvent.DamageCause.VOID
         val diedInFire = deathCause == EntityDamageEvent.DamageCause.FIRE || deathCause == EntityDamageEvent.DamageCause.LAVA
         // check for over-/underflow
-        val currentLives = if(Lives.get(player) > playerLivesLimit){
+        val currentLives: Int
+
+        if (Lives.get(player) > playerLivesLimit){
             Lives.set(player, playerLivesLimit)
-            playerLivesLimit
+            currentLives = playerLivesLimit
         }
-        else if(Lives.get(player) < 1 || diedInVoid){
-            Lives.set(player, playerLivesLimit)
-            0
+        else if (Lives.get(player) < 1 || diedInVoid){
+            Lives.set(player, 0)
+            currentLives = 0
         }
         else {
-            Lives.get(player)
+            currentLives = Lives.get(player)
         }
 
         // set player to spectator
@@ -46,7 +50,7 @@ object PlayerDeathListener: Listener {
         // start constructing the death message
         val deathMessage = Component.text().content("Похоже, вас немножечко убило.").appendNewline()
         // this branch is for huge fuck-ups
-        if(currentLives == 0){
+        if (currentLives == 0) {
             deathMessage.append(Component.text("Ваши вещи сгинули вместе с вами."))
         }
         // this is a normal death branch
@@ -58,10 +62,10 @@ object PlayerDeathListener: Listener {
                 if (item != null) {
                     if (item.containsEnchantment(Enchantment.BINDING_CURSE)) {
                         player.world.dropItem(player.location, item).pickupDelay = 40
-                        player.inventory.removeItem(item)
+                        player.inventory.removeItemAnySlot(item)
                     }
                     if (item.containsEnchantment(Enchantment.VANISHING_CURSE)) {
-                        player.inventory.removeItem(item)
+                        player.inventory.removeItemAnySlot(item)
                     }
                 }
             }

@@ -20,29 +20,57 @@ import kotlin.random.Random
 class WeaponTableGui(private val shulker: Shulker) {
     data class WeaponTableSlotContents(val weapon: ItemStack?, val metal: ItemStack?, val fuel: ItemStack?, val modifier: ItemStack?)
     private val guiSetup: Array<String> = arrayOf(
-        "fWf",
+        "fWi",
         "IgR",
         "fMf",
     )
-    private val fillerElement = StaticGuiElement(
-        'f',
-        ItemStack(Material.GRAY_STAINED_GLASS_PANE),
-        "Краткая справка",
-        "Сверху кладётся оружие,",
-        "Справа - топливо",
-        "слева обычно помещается металл,",
-        "а снизу - дополнительный ингредиент"
-    )
+    private val fillerElement: StaticGuiElement
+        get() {
+            val itemStack = ItemStack(Material.LIGHT_GRAY_STAINED_GLASS_PANE)
+            val meta = itemStack.itemMeta
+            meta.setCustomModelData(1)
+            itemStack.setItemMeta(meta)
+
+            return StaticGuiElement(
+                'f',
+                itemStack,
+                " ",
+            )
+        }
+    private val infoElement: StaticGuiElement
+        get() {
+            val itemStack = ItemStack(Material.GRAY_STAINED_GLASS_PANE)
+            val meta = itemStack.itemMeta
+            meta.setCustomModelData(1)
+            itemStack.setItemMeta(meta)
+            return StaticGuiElement(
+                'i',
+                itemStack,
+                "Краткая справка",
+                "Сверху кладётся оружие,",
+                "Справа - топливо",
+                "слева обычно помещается металл,",
+                "а снизу - дополнительный ингредиент",
+            )
+        }
     private val weaponElement = GuiStorageElement('W', Bukkit.createInventory(null, InventoryType.CHEST))
     private val metalElement  = GuiStorageElement('I', Bukkit.createInventory(null, InventoryType.CHEST))
     private val rodElement    = GuiStorageElement('R', Bukkit.createInventory(null, InventoryType.CHEST))
     private val modfierElement = GuiStorageElement('M', Bukkit.createInventory(null, InventoryType.CHEST))
-    private val buttonElement = StaticGuiElement(
-        'g',
-        ItemStack(Material.LIME_STAINED_GLASS_PANE),
-        { click -> buttonClickHandler(click); return@StaticGuiElement true},
-        "Создать предмет"
-    )
+    private val buttonElement: StaticGuiElement
+        get() {
+            val item = ItemStack(Material.LIME_STAINED_GLASS_PANE)
+            val meta = item.itemMeta
+            meta.setCustomModelData(1)
+            item.setItemMeta(meta)
+
+            return StaticGuiElement(
+                'g',
+                item,
+                { click -> buttonClickHandler(click); return@StaticGuiElement true },
+                "Создать предмет"
+            )
+        }
     private fun getTableContents(player: HumanEntity): WeaponTableSlotContents{
         val craftingGUIElements = mapOf(
             "weapon" to   gui.elements.firstOrNull{it.slotChar == 'W'},
@@ -108,7 +136,8 @@ class WeaponTableGui(private val shulker: Shulker) {
         rodElement,
         modfierElement,
         buttonElement,
-        fillerElement
+        fillerElement,
+        infoElement,
     )
 
     init{

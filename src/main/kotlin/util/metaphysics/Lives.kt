@@ -27,10 +27,13 @@ object Lives {
         player: Player,
         amount: Int,
     ) {
+        val playerLimit = getLimit(player)
+        val livesToSet = if (amount <= playerLimit) amount else playerLimit
+
         player.persistentDataContainer.set(
             livesKey,
             PersistentDataType.INTEGER,
-            amount,
+            livesToSet,
         )
         updateScoreboardView(player, amount)
     }
