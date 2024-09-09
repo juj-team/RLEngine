@@ -113,6 +113,8 @@ object CorpseInteractionListener  : Listener {
         // Teleport player to corpse and set game mode to survival
         resurrected.teleport(corpse)
         resurrected.gameMode = GameMode.SURVIVAL
+        resurrected.allowFlight = false
+        resurrected.isFlying = false
         // Play totem of undying sounds and remove totem
         playTotemOfUndyingEffects(resurrected.location)
         totem.amount -= 1
