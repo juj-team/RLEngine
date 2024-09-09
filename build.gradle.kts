@@ -1,8 +1,8 @@
 plugins {
     kotlin("jvm") version "1.9.22"
-    id("xyz.jpenilla.run-paper") version "2.2.0"
-    id("io.papermc.paperweight.userdev") version "1.5.11"
-    id("com.github.johnrengelman.shadow") version "7.1.2"
+    id("xyz.jpenilla.run-paper") version "2.3.1"
+    id("io.papermc.paperweight.userdev") version "1.7.2"
+    id("com.gradleup.shadow") version "8.3.0"
 }
 
 group = "ru.pp.july"
@@ -16,13 +16,19 @@ java {
 repositories {
     mavenCentral()
     maven {
-        url = uri("https://mvn.lumine.io/repository/maven-public/")
+        url = uri("https://repo.papermc.io/repository/maven-public/")
     }
     maven {
         url = uri("https://repo.minebench.de")
     }
     maven {
         url = uri("https://maven.playpro.com")
+    }
+    maven {
+        url = uri("https://mvn.lumine.io/repository/maven-public/")
+        content {
+            includeModule("LibsDisguises", "LibsDisguises")
+        }
     }
 }
 dependencies {
@@ -48,6 +54,18 @@ dependencies {
 }
 
 tasks {
+    runServer{
+        minecraftVersion("1.19.4")
+        downloadPlugins{
+            url(
+                "https://github.com/dmulloy2/ProtocolLib/releases/download/5.2.0/ProtocolLib.jar"
+            )
+            url(
+                "https://github.com/libraryaddict/LibsDisguises/releases/download/v10.0.42/LibsDisguises-10.0.42-Github.jar"
+            )
+            modrinth("coreprotect", "22.1")
+        }
+    }
     test{
         useJUnitPlatform()
     }
