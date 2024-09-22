@@ -89,6 +89,7 @@ permissions:
       rl_engine.about: true
       rl_engine.sv_cheats: true
       rl_engine.open_corpses: true
+      rl_engine.lost_backpacks: true
 
     rl_engine.get:
       default: op
@@ -108,3 +109,5 @@ permissions:
       default: true
     rl_engine.sv_cheats:
       default: true
+    rl_engine.lost_backpacks:
+      default: op
