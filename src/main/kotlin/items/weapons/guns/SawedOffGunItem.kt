@@ -27,39 +27,20 @@ object SawedOffGunItem: RangedWeapon {
     }
 
     override fun shoot(player: Player, weapon: ItemStack) {
-        val arrows = listOf(
-            player.launchProjectile(
+        val arrows = mutableListOf<Arrow>()
+        for (arrowNum in -6..6) {
+            val arrow = player.launchProjectile(
                 Arrow::class.java,
-                player.eyeLocation.direction.multiply(5)
-            ),
-            player.launchProjectile(
-                Arrow::class.java,
-                player.eyeLocation.direction.multiply(5).rotateAroundY(Math.toRadians(3.5))
-            ),
-            player.launchProjectile(
-                Arrow::class.java,
-                player.eyeLocation.direction.multiply(5).rotateAroundY(Math.toRadians(-3.5))
-            ),
-            player.launchProjectile(
-                Arrow::class.java,
-                player.eyeLocation.direction.multiply(5).rotateAroundY(Math.toRadians(7.0))
-            ),
-            player.launchProjectile(
-                Arrow::class.java,
-                player.eyeLocation.direction.multiply(5).rotateAroundY(Math.toRadians(-7.0))
-            ),
-            player.launchProjectile(
-                Arrow::class.java,
-                player.eyeLocation.direction.multiply(5).rotateAroundY(Math.toRadians(9.5))
-            ),
-            player.launchProjectile(
-                Arrow::class.java,
-                player.eyeLocation.direction.multiply(5).rotateAroundY(Math.toRadians(-9.5))
-            ),
-        )
+                player.eyeLocation.direction
+                    .multiply(5)
+                    .rotateAroundY(Math.toRadians(arrowNum * (120.0 / 12)))
+            )
+
+            arrows.add(arrow)
+        }
 
         arrows.forEach{it.pickupStatus = AbstractArrow.PickupStatus.DISALLOWED}
-        arrows.forEach { it.damage = 4.5 * (3/5.0)
+        arrows.forEach { it.damage = 4.5 * (3 / 5.0)
             transferModifierDataToEntity(it as Projectile, weapon, ItemStack(Material.ARROW)) }
         player.world.playSound(
             player.location,

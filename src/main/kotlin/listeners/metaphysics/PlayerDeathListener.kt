@@ -24,12 +24,18 @@ object PlayerDeathListener: Listener {
         val player = event.player
         if (player.gameMode == GameMode.SPECTATOR) return
 
+        val fireDeaths = listOf(
+            EntityDamageEvent.DamageCause.FIRE,
+            EntityDamageEvent.DamageCause.LAVA,
+            EntityDamageEvent.DamageCause.LIGHTNING,
+        )
+
         Lives.applyDelta(player, -1)
         val playerLivesLimit = Lives.getLimit(player)
         // Check for special death clauses: VOID and FIRE
         val deathCause = player.lastDamageCause?.cause
         val diedInVoid = deathCause == EntityDamageEvent.DamageCause.VOID
-        val diedInFire = deathCause == EntityDamageEvent.DamageCause.FIRE || deathCause == EntityDamageEvent.DamageCause.LAVA
+        val diedInFire = deathCause in fireDeaths
         // check for over-/underflow
         val currentLives: Int
 

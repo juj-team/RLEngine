@@ -32,7 +32,7 @@ object LightRifleGunItem: RangedWeapon {
             player.eyeLocation.direction.multiply(4.5)
         )
         arrow.pickupStatus = AbstractArrow.PickupStatus.DISALLOWED
-        arrow.damage = 4.0 * (3/4.5)
+        arrow.damage = 6.0 * (2.0 / 3.0)
         transferModifierDataToEntity(arrow as Projectile, weapon, ItemStack(Material.ARROW))
         player.world.playSound(
             player.location,

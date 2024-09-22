@@ -1,5 +1,6 @@
 
 import ailments.RLEngineAilments
+import com.sk89q.worldguard.WorldGuard
 import commands.*
 import items.RLEngineItems
 import listeners.RLEngineListeners
@@ -20,6 +21,7 @@ import java.io.File
 
 class RadioLampEngine: JavaPlugin() {
     var coreProtectAPI: CoreProtectAPI? = null
+    var worldGuardAPI: WorldGuard? = null
 
     private val commandExecutors = mapOf<String, CommandExecutor>(
         "get" to GetCommand(),
@@ -31,11 +33,13 @@ class RadioLampEngine: JavaPlugin() {
         "quests" to QuestsCommandExecutor(),
         "sv_cheats" to StanleyEasterEggCommand(),
         "get_lives" to GetLivesCommand(),
+        "lost_backpacks" to LostBackpacksCommand(),
     )
     private val backpackFolder = File(this.dataFolder.absolutePath + "/backpacks")
     private val questFolder = File(this.dataFolder.absolutePath + "/quests")
     override fun onEnable() {
         coreProtectAPI = getCoreProtect()
+        worldGuardAPI = getWorldGuard()
 
         // creating directories
         if (!this.dataFolder.exists()) this.dataFolder.mkdir()
@@ -85,5 +89,9 @@ class RadioLampEngine: JavaPlugin() {
         val coreProtect = plugin.api
 
         return if (coreProtect.isEnabled) coreProtect else null
+    }
+
+    private fun getWorldGuard(): WorldGuard? {
+        return WorldGuard.getInstance()
     }
 }

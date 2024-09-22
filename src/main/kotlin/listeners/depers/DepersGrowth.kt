@@ -1,16 +1,8 @@
 package listeners.depers
 
-import items.metaphysics.AntiDepersBootsItem
-import items.metaphysics.AntiDepersChestplateItem
-import items.metaphysics.AntiDepersHelmetItem
-import items.metaphysics.AntiDepersLeggingsItem
 import listeners.depers.DepersUtils.standingOnDepers
 import org.bukkit.*
-import org.bukkit.block.Block
-import org.bukkit.block.BlockFace
-import org.bukkit.entity.HumanEntity
 import org.bukkit.entity.LivingEntity
-import org.bukkit.entity.Player
 import org.bukkit.persistence.PersistentDataType
 import util.RLEngineTaskManager
 
