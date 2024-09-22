@@ -5,15 +5,13 @@ import items.metaphysics.AntiDepersBootsItem
 import items.metaphysics.AntiDepersChestplateItem
 import items.metaphysics.AntiDepersHelmetItem
 import items.metaphysics.AntiDepersLeggingsItem
-import org.bukkit.GameMode
-import org.bukkit.Material
-import org.bukkit.Particle
-import org.bukkit.Tag
+import org.bukkit.*
 import org.bukkit.block.Block
 import org.bukkit.block.BlockFace
 import org.bukkit.entity.HumanEntity
 import org.bukkit.entity.LivingEntity
 import org.bukkit.entity.Player
+import util.BlockUtils.iterateOverMaterialsInLine
 
 object DepersUtils {
     fun standingOnDepers(entity: LivingEntity) : Boolean {
@@ -80,6 +78,8 @@ object DepersUtils {
     }
 
     fun replaceBlock(block: Block, entity: LivingEntity) {
+        if (isInsulatorBetween(entity.location, block.location)) return
+
         val plugin = RadioLampEngine.instance as RadioLampEngine
         val cp = plugin.coreProtectAPI
 
@@ -89,5 +89,18 @@ object DepersUtils {
         block.type = Material.WARPED_WART_BLOCK
 
         cp?.logPlacement(username, block.location, Material.WARPED_WART_BLOCK, block.blockData)
+    }
+
+    fun isInsulatorBetween(loc1: Location, loc2: Location): Boolean {
+        val materials = iterateOverMaterialsInLine(loc1, loc2) ?: return false
+
+        for (material in materials) {
+            if (
+                "quartz" in material.name.lowercase()
+                || "glass" in material.name.lowercase()
+            ) return true
+        }
+
+        return false
     }
 }

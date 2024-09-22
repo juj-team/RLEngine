@@ -21,13 +21,10 @@ object WheelchairItem: AbstractRLItem {
     
     override fun getItem(result: ItemStack, resultMeta: ItemMeta, resultPDC: PersistentDataContainer): ItemStack {
         resultMeta.displayName(
-            Component.text("ИНВАЛИДНАЯ КОЛЯСКА (ахуеть теперь)", TextColor.color(200,100,250))
+            Component.text("Инвалидная коляска", TextColor.color(200,100,250))
                 .decoration(TextDecoration.ITALIC, false)
         )
 
-        resultMeta.lore(listOf(
-            Component.text("cabron, i need to see your balls", TextColor.color(200,200,200))
-        ))
         resultMeta.setCustomModelData(model)
 
         result.setItemMeta(resultMeta)

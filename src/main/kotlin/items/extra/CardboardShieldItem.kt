@@ -25,6 +25,7 @@ object CardboardShieldItem : AbstractRLItem {
         return result
     }
 
+    @Suppress("Deprecated")
     @EventHandler
     private fun onPunch(event: EntityDamageByEntityEvent) {
         val player = event.entity as? Player ?: return

@@ -1,5 +1,7 @@
 package items.misc
 
+import RadioLampEngine
+import com.sk89q.worldguard.protection.flags.Flags
 import items.AbstractRLItem
 import net.kyori.adventure.text.Component
 import net.kyori.adventure.text.format.TextColor
@@ -16,6 +18,7 @@ import org.bukkit.inventory.ItemFlag
 import org.bukkit.inventory.ItemStack
 import org.bukkit.inventory.meta.ItemMeta
 import org.bukkit.persistence.PersistentDataContainer
+import util.BlockUtils
 
 
 data class SmeltResult(val result: Collection<ItemStack>, val smelted: Boolean)
@@ -79,6 +82,18 @@ object SmeltingPickaxe : AbstractRLItem {
         val activeItem = event.player.inventory.itemInMainHand
         if (!compare(activeItem)) return
 
+        if (!BlockUtils.playerCan(event.player, event.block.location, Flags.BLOCK_BREAK)) return
+
+        val plugin = RadioLampEngine.instance as RadioLampEngine
+        val cp = plugin.coreProtectAPI
+
+        cp?.logRemoval(
+            event.player.name,
+            event.block.location,
+            event.block.type,
+            event.block.blockData,
+        )
+
         val drops = event.block.getDrops(activeItem)
         val (resultItems, canSmeltAnything) = smeltItems(drops)
 
@@ -102,6 +117,9 @@ object SmeltingPickaxe : AbstractRLItem {
         for (drop in resultItems) event.block.world.dropItem(blockCentre, drop)
 
         activeItem.damage(1, event.player)
+
+        event.block.breakNaturally(activeItem)
+
         event.isCancelled = true
     }
 }

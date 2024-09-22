@@ -46,6 +46,13 @@ object BackpackItem: AbstractRLItem {
         return result
     }
 
+    fun getBackpackId(item: ItemStack) : Long? {
+        return item.itemMeta.persistentDataContainer.get(
+            NamespacedKey("jujmiscs", "backpackid"),
+            PersistentDataType.LONG
+        )
+    }
+
     @EventHandler
     fun onBackpackClose(event: InventoryCloseEvent) {
         if (event.inventory.holder !is BackpackInventoryHolder) return
@@ -75,10 +82,7 @@ object BackpackItem: AbstractRLItem {
 
 
         val inventoryHolder = event.view.topInventory.holder as? BackpackInventoryHolder ?: return
-        val backpackID = droppedItem.itemMeta.persistentDataContainer.get(
-            NamespacedKey("jujmiscs", "backpackid"),
-            PersistentDataType.LONG
-        ) ?: return
+        val backpackID = getBackpackId(droppedItem) ?: return
 
         if (inventoryHolder.id != backpackID) return
 
@@ -94,10 +98,7 @@ object BackpackItem: AbstractRLItem {
         val backpackItem = event.player.inventory.itemInMainHand
         if(!compare(backpackItem)) return
 
-        val backpackID = backpackItem.itemMeta.persistentDataContainer.get(
-            NamespacedKey("jujmiscs", "backpackid"),
-            PersistentDataType.LONG
-        ) ?: return
+        val backpackID = getBackpackId(backpackItem) ?: return
 
         val queuedInv = InventoryDeserialiser.loadFromFile(backpackID)
         event.player.openInventory(queuedInv)

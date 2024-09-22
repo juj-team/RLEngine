@@ -67,6 +67,11 @@ commands:
     permission: rl_engine.sv_cheats
     permission-message: "lmao"
     usage: "Usage: /sv_cheats [0|1]"
+  lost_backpacks:
+    description: Просмотреть рюкзаки с рюкзаками внутри
+    permission: rl_engine.lost_backpacks
+    permission-message: "lmao"
+    usage: "Usage: /lost_backpacks"
 
 
 

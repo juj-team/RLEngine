@@ -27,6 +27,8 @@ interface RangedWeapon: AbstractRLItem {
     val magCapacity: Int
     val magLoadKey: NamespacedKey
         get() = NamespacedKey("rle", "ammo_left")
+    val magCapacityKey: NamespacedKey
+        get() = NamespacedKey("rle", "max_capacity")
 
     override fun createItem() {
         super.createItem()
@@ -43,6 +45,26 @@ interface RangedWeapon: AbstractRLItem {
                 if (compare(offHandItem)) onInventoryTick(it, offHandItem)
             }
         }, 2L, 1L)
+    }
+
+    fun setMagCapacity(item: ItemStack, amount: Int) {
+        val itemMeta = item.itemMeta
+        itemMeta.persistentDataContainer.set(magCapacityKey, PersistentDataType.INTEGER, amount)
+        item.setItemMeta(itemMeta)
+    }
+
+    fun getMagCapacity(item: ItemStack): Int {
+        val itemMeta = item.itemMeta
+
+        if (!itemMeta.persistentDataContainer.has(magCapacityKey)) {
+            setMagCapacity(item, magCapacity)
+            return magCapacity
+        }
+
+        return itemMeta.persistentDataContainer.get(
+            magCapacityKey,
+            PersistentDataType.INTEGER
+        )!!
     }
 
     fun onInventoryTick(player: Player, item: ItemStack){
@@ -116,7 +138,7 @@ interface RangedWeapon: AbstractRLItem {
         if(ammoLeft > 0){
             shoot(event.player, weapon)
             // show ammo left
-            event.player.sendActionBar(Component.text("${ammoLeft - 1}/${magCapacity}"))
+            event.player.sendActionBar(Component.text("${ammoLeft - 1}/${getMagCapacity(weapon)}"))
             setAmmoLeft(weapon, ammoLeft - 1)
             if(!decreaseDurability(weapon)){
                 event.player.world.playSound(
@@ -152,12 +174,16 @@ interface RangedWeapon: AbstractRLItem {
     }
 
     fun reload(player: Player, weapon: ItemStack){
-        val eligibleItemStacks = player.inventory.contents.filter { it != null && checkItemAsAmmo(it) && it.amount >= magCapacity }
+        val eligibleItemStacks = player.inventory.contents.filter {
+            it != null && checkItemAsAmmo(it) && it.amount >= getMagCapacity(weapon)
+        }
         if(eligibleItemStacks.isEmpty()){
             player.sendActionBar(Component.text("Не хватает патронов :("))
             return
         }
         val reloadStack = eligibleItemStacks.first() ?: return
+        val magCapacity = getMagCapacity(weapon)
+
         reloadStack.amount -= magCapacity
         setAmmoLeft(weapon, magCapacity)
         val ammoLeftInPockets = player.inventory.contents.filter { it != null && checkItemAsAmmo(it) }.sumOf { it?.amount ?: 0 }

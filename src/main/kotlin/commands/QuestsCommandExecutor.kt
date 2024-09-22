@@ -25,6 +25,7 @@ class QuestsCommandExecutor: CommandExecutor, TabCompleter {
                     else -> listOf()
                 }
             }
+            3 -> Bukkit.getOnlinePlayers().map{it.name}
             else -> listOf()
         }
 }
@@ -38,7 +39,13 @@ class QuestsCommandExecutor: CommandExecutor, TabCompleter {
         when(operation){
             "start" -> {
                 if(!sender.isOp) return true
-                if(RLEngineQuests.getQuestStatus(sender)){
+                val subject: Player = if (args.size == 3) {
+                    Bukkit.getPlayer(args[2]) ?: return true
+                } else {
+                    sender
+                }
+
+                if(RLEngineQuests.getQuestStatus(subject)){
                     sender.sendMessage("Player is already in quest!")
                     return true
                 }
@@ -47,7 +54,7 @@ class QuestsCommandExecutor: CommandExecutor, TabCompleter {
                     return true
                 }
                 val questId = args[1]
-                RLEngineQuests.startQuest(sender, questId)
+                RLEngineQuests.startQuest(subject, questId)
             }
             "terminate" -> {
                 if(!sender.isOp) return true
