@@ -15,6 +15,7 @@ import org.bukkit.entity.Shulker
 import org.bukkit.event.inventory.InventoryType
 import org.bukkit.inventory.ItemStack
 import recipes.WeaponTableRecipes
+import recipes.weapontable.InsufficientWeaponTableResources
 import kotlin.random.Random
 
 class WeaponTableGui(private val shulker: Shulker) {
@@ -111,13 +112,18 @@ class WeaponTableGui(private val shulker: Shulker) {
         }
     }
     private fun craftFromItems(tableContents: WeaponTableSlotContents, crafter: Player): ItemStack? {
-        return WeaponTableRecipes.getRecipeByIngredients(
-        tableContents.weapon ?: return null,
-        tableContents.metal ?: return null,
-        tableContents.modifier ?: return null,
-            crafter,
-        tableContents.fuel ?: return null
-        )
+        try {
+            return WeaponTableRecipes.getRecipeByIngredients(
+                tableContents.weapon ?: return null,
+                tableContents.metal ?: return null,
+                tableContents.modifier ?: return null,
+                crafter,
+                tableContents.fuel ?: return null,
+            )
+        } catch (exc: InsufficientWeaponTableResources) {
+            crafter.sendMessage("Маловато ресурсов, маловато...")
+            return null
+        }
     }
     private fun dropRemainingItems(player: HumanEntity) {
         val thingsToDrop = getTableContents(player)

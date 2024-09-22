@@ -4,14 +4,13 @@ import listeners.depers.DepersGrowth.getDepersTimer
 import listeners.depers.DepersUtils.canReplaceBlock
 import listeners.depers.DepersUtils.isNotImmune
 import listeners.depers.DepersUtils.replaceBlock
-import org.bukkit.Location
 import org.bukkit.entity.EntityType
 import org.bukkit.entity.LivingEntity
+import org.bukkit.entity.Mob
 import org.bukkit.entity.Player
 import org.bukkit.potion.PotionEffect
 import org.bukkit.potion.PotionEffectType
 import util.BlockUtils.iterateOverBlocks
-import util.BlockUtils.iterateOverMaterialsInLine
 
 object DepersEffectMediator {
     private val effects = mapOf(
@@ -86,31 +85,18 @@ object DepersEffectMediator {
         )
     }
 
-    private fun isInsulatorBetween(loc1: Location, loc2: Location): Boolean {
-        val materials = iterateOverMaterialsInLine(loc1, loc2) ?: return false
-
-        for (material in materials) {
-            if (
-                "quartz" in material.name.lowercase()
-                || "glass" in material.name.lowercase()
-            ) return true
-        }
-
-        return false
-    }
-
     private fun entityGrowth(entity: LivingEntity) {
         val entitiesAround = entity.location.getNearbyLivingEntities(
             15.0,
             15.0,
             15.0,
-        )
+        ).filterIsInstance<Mob>()
 
         for (entityAround in entitiesAround) {
             if (entityAround.type == EntityType.PLAYER) continue
             if (entityAround == entity) continue
             if (!isNotImmune(entityAround)) continue
-            if (isInsulatorBetween(entity.location, entityAround.location)) continue
+            if (DepersUtils.isInsulatorBetween(entity.location, entityAround.location)) continue
 
             val blocksAround = iterateOverBlocks(
                 entityAround,

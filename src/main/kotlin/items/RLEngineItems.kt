@@ -5,6 +5,9 @@ import items.depers.*
 import items.extra.*
 import items.hearts.CookedHeart
 import items.hearts.Heart
+import items.ingredients.CopperBucketItem
+import items.ingredients.CopperGearItem
+import items.ingredients.CopperPlatesItem
 import items.metaphysics.*
 import items.misc.*
 import items.weapons.WeaponTableSummonerItem
@@ -16,6 +19,11 @@ object RLEngineItems {
     private val registryElements = listOf(
         // And now, the list of ALL items for registration. Cuz kotlin can't have self-instantiating singletons
         // & I don't have time to fuck around with reflections
+        // ingredients
+        CopperGearItem,
+        CopperBucketItem,
+        CopperPlatesItem,
+
         // depers
         BottleTotemItem,
         BreezeTotemItem,
@@ -98,6 +106,7 @@ object RLEngineItems {
         CardboardShieldItem,
         NightGogglesItem,
         PowerGlovesItem,
+        MoonKokCrumb,
     )
     init{
         registryElements.forEach { it.createItem() }

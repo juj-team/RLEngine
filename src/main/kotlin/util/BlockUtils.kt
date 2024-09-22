@@ -1,9 +1,14 @@
 package util
 
+import RadioLampEngine
+import com.sk89q.worldedit.bukkit.BukkitAdapter
+import com.sk89q.worldguard.bukkit.WorldGuardPlugin
+import com.sk89q.worldguard.protection.flags.StateFlag
 import org.bukkit.Location
 import org.bukkit.Material
 import org.bukkit.block.Block
 import org.bukkit.entity.LivingEntity
+import org.bukkit.entity.Player
 
 object BlockUtils {
     fun iterateOverBlocks(entity: LivingEntity, rx: IntRange, ry: IntRange, rz: IntRange) : Sequence<Block> {
@@ -54,5 +59,27 @@ object BlockUtils {
                 currentDistance += 0.7
             }
         }
+    }
+
+    fun playerCan(player: Player, location: Location, flag: StateFlag) : Boolean {
+        val plugin = RadioLampEngine.instance as RadioLampEngine
+        val wg = plugin.worldGuardAPI!!
+
+        val worldGuardPlayer = WorldGuardPlugin.inst().wrapPlayer(player)
+        val worldGuardLocation = BukkitAdapter.adapt(location)
+        val worldGuardWorld = BukkitAdapter.adapt(location.world)
+
+        val regionContainer = wg.platform.regionContainer
+
+        val regions = regionContainer.get(worldGuardWorld) ?: return true
+        val applicableRegions = regions.getApplicableRegions(
+            worldGuardLocation.toVector().toBlockPoint()
+        )
+
+        val flagValue = applicableRegions.queryValue(worldGuardPlayer, flag) ?: return true
+
+        println(flagValue)
+
+        return StateFlag.test(flagValue)
     }
 }

@@ -8,6 +8,8 @@ import org.bukkit.Material
 import org.bukkit.Particle
 import org.bukkit.Sound
 import org.bukkit.SoundCategory
+import org.bukkit.entity.AbstractArrow
+import org.bukkit.entity.Arrow
 import org.bukkit.entity.Player
 import org.bukkit.inventory.ItemStack
 import org.bukkit.inventory.meta.ItemMeta
@@ -27,7 +29,9 @@ object RocketGunItem : RangedWeapon {
 
     override fun shoot(player: Player, weapon: ItemStack) {
         val force = 2
-        val launchDirection = player.eyeLocation.direction.multiply(-1)
+        val shootDirection = player.eyeLocation.direction.clone().multiply(force)
+        val launchDirection = shootDirection.clone().multiply(-1)
+
         player.world.playSound(
             player.location,
             Sound.ENTITY_DRAGON_FIREBALL_EXPLODE,
@@ -40,7 +44,15 @@ object RocketGunItem : RangedWeapon {
             player.location,
             1
         )
-        player.velocity = player.velocity.add(launchDirection.multiply(force))
+
+        val arrow = player.launchProjectile(
+            Arrow::class.java,
+            shootDirection,
+        )
+        arrow.pickupStatus = AbstractArrow.PickupStatus.DISALLOWED
+        arrow.damage = 2.0
+
+        player.velocity = player.velocity.add(launchDirection)
     }
 
 

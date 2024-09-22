@@ -27,29 +27,18 @@ object ShotgunGunItem: RangedWeapon {
     }
 
     override fun shoot(player: Player, weapon: ItemStack) {
-        val arrows = listOf(
-                player.launchProjectile(
+        val arrows = mutableListOf<Arrow>()
+        for (arrowNum in -5..5) {
+            val arrow = player.launchProjectile(
                 Arrow::class.java,
-                player.eyeLocation.direction.multiply(4)
-            ),
-            player.launchProjectile(
-                Arrow::class.java,
-                player.eyeLocation.direction.multiply(4).rotateAroundY(Math.toRadians(3.5))
-            ),
-            player.launchProjectile(
-                Arrow::class.java,
-                player.eyeLocation.direction.multiply(4).rotateAroundY(Math.toRadians(-3.5))
-            ),
-            player.launchProjectile(
-                Arrow::class.java,
-                player.eyeLocation.direction.multiply(4).rotateAroundY(Math.toRadians(7.0))
-            ),
-            player.launchProjectile(
-                Arrow::class.java,
-                player.eyeLocation.direction.multiply(4).rotateAroundY(Math.toRadians(-7.0))
-            ),
+                player.eyeLocation.direction
+                    .multiply(5)
+                    .rotateAroundY(Math.toRadians(arrowNum * (100.0 / 10)))
+            )
 
-        )
+            arrows.add(arrow)
+        }
+
         arrows.forEach{it.pickupStatus = AbstractArrow.PickupStatus.DISALLOWED}
         arrows.forEach { it.damage = 4.5 * (3/4.0)
             transferModifierDataToEntity(it as Projectile, weapon, ItemStack(Material.ARROW)) }

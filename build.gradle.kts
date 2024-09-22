@@ -25,10 +25,7 @@ repositories {
         url = uri("https://maven.playpro.com")
     }
     maven {
-        url = uri("https://mvn.lumine.io/repository/maven-public/")
-        content {
-            includeModule("LibsDisguises", "LibsDisguises")
-        }
+        url = uri("https://maven.enginehub.org/repo/")
     }
 }
 dependencies {
@@ -49,6 +46,8 @@ dependencies {
     implementation("com.bladecoder.ink:blade-ink:1.1.2")
     // https://maven.playpro.com/net/coreprotect/coreprotect/
     compileOnly("net.coreprotect:coreprotect:22.1")
+
+    compileOnly("com.sk89q.worldguard:worldguard-bukkit:7.0.8")
 
     paperweight.paperDevBundle("1.19.4-R0.1-SNAPSHOT")
 }

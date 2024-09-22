@@ -1,5 +1,7 @@
 package items.misc
 
+import RadioLampEngine
+import com.sk89q.worldguard.protection.flags.Flags
 import items.AbstractRLItem
 import net.kyori.adventure.text.Component
 import net.kyori.adventure.text.format.TextColor
@@ -12,6 +14,7 @@ import org.bukkit.inventory.ItemFlag
 import org.bukkit.inventory.ItemStack
 import org.bukkit.inventory.meta.ItemMeta
 import org.bukkit.persistence.PersistentDataContainer
+import util.BlockUtils
 import kotlin.math.abs
 import kotlin.math.sign
 
@@ -55,6 +58,7 @@ object HandDrill : AbstractRLItem {
 
     @EventHandler
     fun onBlockBreak(event: BlockBreakEvent) {
+
         val activeItem = event.player.inventory.itemInMainHand
         if (!compare(activeItem)) return
         if (event.player.isSneaking) return
@@ -82,6 +86,9 @@ object HandDrill : AbstractRLItem {
             1.0f,
         )
 
+        val plugin = RadioLampEngine.instance as RadioLampEngine
+        val cp = plugin.coreProtectAPI
+
         for (dx in -1..1) {
             for (dy in -1..1) {
                 for (dz in -1..1) {
@@ -92,18 +99,25 @@ object HandDrill : AbstractRLItem {
                         event.block.location.z + dz + direction[2],
                     )
 
-                    if (location == event.block.location) continue
-
                     val block = location.block
                     val blockBreakSpeed = block.getBreakSpeed(event.player)
                     if (blockBreakSpeed < mainBlockMimingSpeed) continue
                     if (blockBreakSpeed == Float.POSITIVE_INFINITY) continue
+                    if (!BlockUtils.playerCan(event.player, location, Flags.BLOCK_BREAK)) continue
+
+                    cp?.logRemoval(
+                        event.player.name,
+                        location.block.location,
+                        location.block.type,
+                        location.block.blockData,
+                    )
 
                     activeItem.damage(1, event.player)
                     location.block.breakNaturally(activeItem)
                 }
             }
         }
+        event.isCancelled = true
     }
 
 }
