@@ -48,8 +48,6 @@ abstract class AbstractWeaponTableRecipe : WeaponTableRecipeInterface {
             getRecipeComponentOrNull(fuel, WeaponComponent.FUEL),
         )
 
-        println(components)
-
         return components.all { it != null }
     }
 
