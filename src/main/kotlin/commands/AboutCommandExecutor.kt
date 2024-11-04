@@ -12,7 +12,7 @@ import org.bukkit.entity.Player
 
 class AboutCommandExecutor: CommandExecutor, TabCompleter {
     private val aboutMsg = "<gold><b>RADIO LAMP ENGINE</b> - ГЛАВНЫЙ ДВИЖОК ИЮЛЯ</gold>" +
-            "<br><br><b><dark_green>Наш сайт</dark_green></b>: <u><click:open_url:'https://july.pp.ru/'>july.pp.ru</click></u>" +
+            "<br><br><b><dark_green>Лицензия:</dark_green></b>: <u><click:open_url:'https://github.com/juj-team/RLEngine/blob/master/LICENSE'>MIT</click></u>" +
             "<br><green><b>Авторы</b></green>: " +
             "<u><br><click:open_url:'https://somichev.dev/'>somichev.dev</click></u> - код" +
             "<br>mrknrt - концепт, дизайн" +
